@@ -1,0 +1,56 @@
+{% if success_message %}
+<div class="alert" id="alert">
+    {{ success_message }}
+    <div class="close-alert" id="close-alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M16.2427 7.75738L7.75739 16.2427M16.2427 16.2426L7.75739 7.75732" stroke="#28303F"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </div>
+    <div class="progress-bar" id="progress-alert">
+        <progress class="alert-bar" id="alert-bar" max="100"></progress>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const alertWrapper = document.getElementById("alert");
+        const progressBar = document.getElementById("progress-alert");
+        let alertBar = document.getElementById("alert-bar");
+
+        alertWrapper.style.display = "flex";
+
+        progressBar.style.display = "block";
+
+        setTimeout(function () {
+            alertWrapper.style.display = "none";
+
+            progressBar.style.display = "none";
+        }, 3000);
+
+        var updateInterval = 30;
+        var progress = 0;
+        var increment = (updateInterval / 3000) * 100;
+
+        var intervalId = setInterval(function () {
+            alertBar.value += increment; // Use += to increment the value
+            progress += increment; // Update progress
+
+            if (progress >= 100) {
+                clearInterval(intervalId);
+            }
+        }, updateInterval);
+    });
+
+
+    const closeAlert = document.getElementById("close-alert");
+
+    if (closeAlert) {
+        closeAlert.addEventListener("click", function () {
+            ddocument.getElementById("alert").style.display = "none";
+        });
+    }
+
+
+</script>
+{% endif %}

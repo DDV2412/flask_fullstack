@@ -1,0 +1,355 @@
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../fonts/walsheim-bold.woff") format("woff");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("../fonts/walsheim-regular.woff") format("woff");
+  font-weight: 400;
+}
+
+:root {
+  --shadow-small: 8px 20px 60px 0px rgba(2, 6, 23, 0.1);
+  --shadow-medium: 8px 20px 60px 0px rgba(2, 6, 23, 0.35);
+  --text-color: #020617;
+  --border-color: #cbd5e1;
+  --rounded-small: 0.5rem;
+  --primary-color: #1d4ed8;
+  --white: #fff;
+  --secondary-color: #00cdcc;
+  --danger-color: #fe0000;
+}
+html {
+  font-size: 14px;
+  font-family: "GT Walsheim Pro";
+  transition: all 300ms ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  transition: all 300ms ease-in-out;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-family: "GT Walsheim Pro";
+  font-weight: 400;
+  transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+h1 {
+  font-size: 3.25rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: all 300ms ease-in-out;
+}
+
+h2 {
+  font-size: 2.875rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: all 300ms ease-in-out;
+}
+
+h3 {
+  font-size: 2.562rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: all 300ms ease-in-out;
+}
+
+h4 {
+  font-size: 2.25rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: all 300ms ease-in-out;
+}
+
+h5 {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: all 300ms ease-in-out;
+}
+
+h6 {
+  font-size: 1.812rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: all 300ms ease-in-out;
+}
+
+p {
+  font-size: 1;
+  font-weight: 400;
+  letter-spacing: 0.15px;
+  opacity: 0.6;
+  transition: all 300ms ease-in-out;
+}
+
+a,
+ul,
+li {
+  text-decoration: none;
+  list-style: none;
+  letter-spacing: 0.15px;
+  transition: all 300ms ease-in-out;
+}
+
+a {
+  color: var(--primary-color);
+  transition: all 300ms ease-in-out;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+.section_auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  transition: all 300ms ease-in-out;
+}
+
+.auth-wrapper {
+  border-radius: 3rem;
+  box-shadow: var(--shadow-small);
+  width: 100%;
+  transition: all 300ms ease-in-out;
+  max-width: 550px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.field-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 300ms ease-in-out;
+}
+
+.input-field {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  border-radius: var(--rounded-small);
+  outline-color: var(--primary-color);
+  width: 100%;
+  transition: all 300ms ease-in-out;
+}
+
+.form-content {
+  padding: 0 2rem 2rem 2rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  transition: all 300ms ease-in-out;
+}
+.form-header-content {
+  padding: 12rem 2rem 2rem 2rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  transition: all 300ms ease-in-out;
+}
+
+.form-header {
+  overflow: hidden;
+  position: relative;
+  transition: all 300ms ease-in-out;
+}
+
+.form-picture img {
+  width: 6rem;
+  transition: all 300ms ease-in-out;
+}
+
+.form-image-wrapper {
+  background-color: var(--primary-color);
+  width: 12.8125rem;
+  height: 12.8125rem;
+  border-radius: 12.8125rem;
+  position: absolute;
+  top: -3.26863rem;
+  left: -2.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0 0 2rem;
+  transition: all 300ms ease-in-out;
+}
+
+.form-image-wrapper::before {
+  background-color: var(--primary-color);
+  width: 14.375rem;
+  opacity: 0.3;
+  height: 14.375rem;
+  border-radius: 14.375rem;
+  position: absolute;
+  top: -4.83113rem;
+  left: -3.1875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0 0 3rem;
+  content: "";
+  filter: blur(75px);
+  z-index: -1;
+  transition: all 300ms ease-in-out;
+}
+
+button {
+  padding: 1rem 1.5rem;
+  outline: none;
+  font-family: "GT Walsheim Pro";
+  border: none;
+  color: var(--white);
+  font-size: 1rem;
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--rounded-small);
+  background-color: var(--primary-color);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 300ms ease-in-out;
+}
+
+button span {
+  position: relative;
+  z-index: 1;
+}
+
+button::after {
+  background-color: var(--secondary-color);
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  left: 0;
+  top: 0;
+  border-radius: var(--rounded-small);
+  overflow: hidden;
+  transform-origin: center;
+  opacity: 0.3;
+  backdrop-filter: blur(10px);
+  filter: blur(75px);
+}
+
+button:hover::after {
+  animation: buttonHover 300ms ease-in-out;
+  visibility: visible;
+}
+
+@keyframes buttonHover {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 0 2rem 2rem 2rem;
+  padding-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-icon {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  color: var(--border-color);
+  cursor: pointer;
+}
+.password-icon svg.active {
+  display: flex;
+}
+
+.password-icon svg.in-active {
+  display: none;
+}
+
+.aggr-wrapper {
+  font-size: 0.875rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.error-message {
+  margin-top: 0.25rem;
+  color: var(--danger-color);
+  font-size: 0.75rem;
+}
+
+@media screen and (min-width: 478px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .form-header-content {
+    padding: 12rem 3rem 3rem 3rem;
+  }
+  .form-content {
+    padding: 0 3rem 3rem 3rem;
+  }
+
+  .form-image-wrapper {
+    padding: 3rem 0 0 3rem;
+  }
+
+  .form-footer {
+    padding: 0 3rem 3rem 3rem;
+  }
+}
+
+@media screen and (min-width: 991px) {
+  html {
+    font-size: 15px;
+  }
+  .container {
+    padding: 2rem;
+  }
+}

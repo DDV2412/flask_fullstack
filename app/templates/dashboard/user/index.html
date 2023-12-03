@@ -1,0 +1,106 @@
+{% extends 'dashboard-layout.html' %} {% block header %}
+<h1>{% block title %}User{% endblock %}</h1>
+{% endblock %} {% block content %}
+
+<section class="section_dashboard">
+    <div class="title-wrapper">
+        <h2>Users</h2>
+        <a href="" class="btn-add" role="link" aria-label="Add Item"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M10 18C10 19.1046 10.8954 20 12 20C13.1046 20 14 19.1046 14 18V14H18C19.1046 14 20 13.1046 20 12C20 10.8954 19.1046 10 18 10H14V6C14 4.89543 13.1046 4 12 4C10.8954 4 10 4.89543 10 6V10L6 10C4.89543 10 4 10.8954 4 12C4 13.1046 4.89543 14 6 14L10 14V18Z"
+                    stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+            </svg>
+            <span>Add New</span></a>
+    </div>
+    <div class="content-wrapper">
+        <div class="content-head">
+            <div class="field-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M18 15.7661L19.5373 17.3034C20.1542 17.9203 20.1542 18.9204 19.5373 19.5373C18.9204 20.1542 17.9203 20.1542 17.3034 19.5373L15.766 18M4 10.8C4 7.04446 7.04446 4 10.8 4C14.5555 4 17.6 7.04446 17.6 10.8C17.6 14.5555 14.5555 17.6 10.8 17.6C7.04446 17.6 4 14.5555 4 10.8Z"
+                        stroke="#28303F" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <input type="text" id="search" name="search" placeholder="Search with title..."
+                    class="input-field search" />
+            </div>
+            <div class="field-wrapper">
+                <select class="select-field">
+                    <option>15</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID <span class="sort-icon">
+                                <svg class="asc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <svg class="desc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></span></th>
+                        <th>Name <span class="sort-icon">
+                                <svg class="asc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <svg class="desc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></span></th>
+                        <th>Email </th>
+                        <th>Permission</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>IJAAS</td>
+                        <td>IAAS</td>
+                        <td>111</td>
+                        <td class="td-action">
+                            <button type="button" class="btn-action action-edit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M8.75234 21H19M11.7844 5.31171C11.7844 5.31171 11.7844 6.94634 13.419 8.58096C15.0537 10.2156 16.6883 10.2156 16.6883 10.2156M5.31963 17.9881L8.75234 17.4977C9.2475 17.4269 9.70636 17.1975 10.06 16.8438L18.3229 8.58096C19.2257 7.67818 19.2257 6.21449 18.3229 5.31171L16.6883 3.67708C15.7855 2.77431 14.3218 2.77431 13.419 3.67708L5.15616 11.94C4.80248 12.2936 4.57305 12.7525 4.50231 13.2477L4.01193 16.6804C3.90295 17.4432 4.5568 18.097 5.31963 17.9881Z"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                            </button>
+
+                            <button type="button" class="btn-action action-delete">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M19 9L18.2841 18.3068C18.1238 20.3908 16.386 22 14.2959 22H9.70412C7.61398 22 5.87621 20.3908 5.71591 18.3068L5 9M21 7C18.4021 5.73398 15.3137 5 12 5C8.68635 5 5.59792 5.73398 3 7M10 5V4C10 2.89543 10.8954 2 12 2C13.1046 2 14 2.89543 14 4V5M10 11V17M14 11V17"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                            </button>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>IJAAS</td>
+                        <td>IAAS</td>
+                        <td>111</td>
+                        <td>Edit</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

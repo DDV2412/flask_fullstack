@@ -1,0 +1,17 @@
+[project]
+name = "app"
+version = "1.0.0"
+description = "IPMUGO Digital Library"
+dependencies = [
+    "flask",
+    "jsonschema",
+    "requests",
+    "beautifulsoup4",
+    "python-dotenv",
+    "mongoengine",
+    "pymongo",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"

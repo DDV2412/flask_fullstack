@@ -1,0 +1,148 @@
+{% extends 'dashboard-layout.html' %} {% block header %}
+<h1>{% block title %}Add Journal{% endblock %}</h1>
+{% endblock %} {% block content %}
+
+<section class="section_dashboard">
+    <div class="title-wrapper">
+        <h2>Add New Journal</h2>
+        {% include 'alert.html'%}
+    </div>
+
+    <div class="content-wrapper">
+        <form method="post" class="form-content">
+            <div class="field-wrapper">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" class="input-field" />
+                <span class="error-message" id="title-error-message"></span>
+            </div>
+            <div class="grid-col-2">
+                <div class="field-wrapper">
+                    <label for="issn">ISSN</label>
+                    <input type="text" id="issn" name="issn" class="input-field" />
+                    <span class="error-message" id="issn-error-message"></span>
+                </div>
+                <div class="field-wrapper">
+                    <label for="e-issn">E-ISSN</label>
+                    <input type="text" id="e-issn" name="e-issn" class="input-field" />
+                    <span class="error-message" id="e-issn-error-message"></span>
+                </div>
+            </div>
+            <div class="field-wrapper">
+                <label for="short_summary">Summary</label>
+                <textarea id="short_summary" name="short_summary" class="input-field"></textarea>
+            </div>
+            <div class="field-wrapper">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" class="input-field"></textarea>
+            </div>
+            <div class="grid-col-2">
+                <div class="field-wrapper">
+                    <label for="abbreviation">Abbreviation</label>
+                    <input type="text" id="abbreviation" name="abbreviation" class="input-field" />
+                    <span class="error-message" id="abbreviation-error-message"></span>
+                </div>
+                <div class="field-wrapper">
+                    <label for="sites">Sites</label>
+                    <input type="url" pattern="https://.*" id="sites" name="sites" class="input-field" />
+                    <span class="error-message" id="sites-error-message"></span>
+                </div>
+            </div>
+            <div class="field-wrapper">
+                <label for="thumbnail_image">Thumbnail Image</label>
+                <div class="input-file-wrapper">
+                    <input type="file" id="thumbnail" name="thumbnail" class="input-file"
+                        accept="image/jpg,image/png,image/jpeg" />
+                    <input type="hidden" id="thumbnail_image" name="thumbnail_image" class="input-file" />
+                    <div class="file-input">
+                        <div class="svg-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <path
+                                    d="M22 14L19.061 11.8839C17.5338 10.7843 15.4467 10.898 14.0479 12.1569L9.95209 15.8431C8.55331 17.102 6.4662 17.2157 4.93901 16.1161L2 14M6 22H18C20.2091 22 22 20.2091 22 18V6C22 3.79086 20.2091 2 18 2H6C3.79086 2 2 3.79086 2 6V18C2 20.2091 3.79086 22 6 22ZM11 8.5C11 9.88071 9.88071 11 8.5 11C7.11929 11 6 9.88071 6 8.5C6 7.11929 7.11929 6 8.5 6C9.88071 6 11 7.11929 11 8.5Z"
+                                    stroke="#28303F" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span>Select Thumbnail</span>
+                    </div>
+                    <div class="preview" id="preview-thumbnail">
+                        <figure>
+                            <div class="close-image" id="close-thumbnail">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path d="M16.2427 7.75738L7.75739 16.2427M16.2427 16.2426L7.75739 7.75732"
+                                        stroke="#28303F" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="" id="image-thumbnail" alt="Journal Thumbnail"
+                                aria-describedby="Journal Thumbnail" width="500" height="500" />
+                        </figure>
+
+                    </div>
+                </div>
+                <span class="error-message" id="thumbnail-error-message"></span>
+            </div>
+            <div class="field-wrapper">
+                <label for="main_image">Main Image</label>
+                <div class="input-file-wrapper">
+                    <input type="file" id="main_file" name="main_file" class="input-file"
+                        accept="image/jpg,image/png,image/jpeg" />
+                    <input type="hidden" id="main_image" name="main_image" class="input-file" />
+                    <div class="file-input">
+                        <div class="svg-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <path
+                                    d="M22 14L19.061 11.8839C17.5338 10.7843 15.4467 10.898 14.0479 12.1569L9.95209 15.8431C8.55331 17.102 6.4662 17.2157 4.93901 16.1161L2 14M6 22H18C20.2091 22 22 20.2091 22 18V6C22 3.79086 20.2091 2 18 2H6C3.79086 2 2 3.79086 2 6V18C2 20.2091 3.79086 22 6 22ZM11 8.5C11 9.88071 9.88071 11 8.5 11C7.11929 11 6 9.88071 6 8.5C6 7.11929 7.11929 6 8.5 6C9.88071 6 11 7.11929 11 8.5Z"
+                                    stroke="#28303F" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span>Select Image</span>
+                    </div>
+                    <div class="preview" id="preview-image">
+                        <figure>
+                            <div class="close-image" id="close-image">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path d="M16.2427 7.75738L7.75739 16.2427M16.2427 16.2426L7.75739 7.75732"
+                                        stroke="#28303F" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <img src="" id="main_image_url" alt="Journal Image" aria-describedby="Journal Image"
+                                width="500" height="500" />
+                        </figure>
+
+                    </div>
+                </div>
+                <span class="error-message" id="main-error-message"></span>
+            </div>
+            <div class="grid-col-2">
+                <div class="field-wrapper">
+                    <label for="editor">Editor</label>
+                    <input type="text" id="editor" name="editor" class="input-field" />
+                    <span class="error-message" id="editor-error-message"></span>
+                </div>
+                <div class="field-wrapper">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="input-field" />
+                    <span class="error-message" id="email-error-message"></span>
+                </div>
+            </div>
+
+            <div class="field-wrapper">
+                <button type="submit" aria-pressed="true">
+                    <span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+</section>
+<script>
+    new RichTextEditor("#short_summary");
+    new RichTextEditor("#description");
+</script>
+<script src="{{ url_for('static', filename='javascripts/validation/validation.js') }}"></script>
+
+{% endblock %}

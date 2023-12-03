@@ -1,0 +1,98 @@
+{% extends 'layout.html' %} {% block header %}
+<h1>{% block title %}Sign Up{% endblock %}</h1>
+{% endblock %} {% block content %}
+<section class="section_auth">
+    <div class="container">
+        <form method="post" class="auth-wrapper">
+            <div class="form-header">
+                <div class="form-image-wrapper">
+                    <picture class="form-picture">
+                        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="IPMUGO Digital Library"
+                            loading="eager" aria-describedby="IPMUGO Digital Library" width="203.242px"
+                            height="103.569px" />
+                    </picture>
+                </div>
+                <div class="form-header-content">
+                    <h1>Sign Up</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+            </div>
+            <div class="form-content">
+                <div class="field-wrapper">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="input-field" />
+                    <span class="error-message" id="name-error-message"></span>
+                </div>
+                <div class="field-wrapper">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="input-field" />
+                    <span class="error-message" id="email-error-message"></span>
+                </div>
+                <div class="field-wrapper">
+                    <label for="password">Password</label>
+                    <div class="password-field"><input type="password" id="password" name="password"
+                            class="input-field" />
+                        <div class="password-icon" id="password">
+                            <svg class="in-active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2V4M21 5L19.5 6.5M2.99997 5L4.49997 6.5M12 22C15.6042 22 18.8134 19.6545 20.8772 17.6789C22.3743 16.2458 22.3743 13.7542 20.8772 12.3211C18.8134 10.3455 15.6042 8 12 8C8.3958 8 5.18661 10.3455 3.12281 12.3211C1.62573 13.7542 1.62573 16.2458 3.12281 17.6789C5.18661 19.6545 8.3958 22 12 22ZM15 15C15 16.6569 13.6568 18 12 18C10.3431 18 8.99997 16.6569 8.99997 15C8.99997 13.3431 10.3431 12 12 12C13.6568 12 15 13.3431 15 15Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                            <svg class="active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M4.00006 4L20.0001 20M14.0001 14.2361C13.4693 14.7111 12.7684 15 12.0001 15C10.3432 15 9.00006 13.6569 9.00006 12C9.00006 11.2316 9.28891 10.5308 9.76395 10M19.6078 15.6077C20.1792 15.1103 20.6903 14.6099 21.1304 14.1469C22.29 12.9268 22.29 11.0732 21.1304 9.8531C19.1746 7.79533 15.8156 5 12.0001 5C11.1087 5 10.2422 5.15256 9.41276 5.41264M6.50006 6.80338C5.0415 7.73444 3.7977 8.87678 2.86977 9.8531C1.71016 11.0732 1.71016 12.9268 2.86977 14.1469C4.82555 16.2047 8.18455 19 12.0001 19C13.8681 19 15.6268 18.3299 17.1649 17.4044"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="error-message" id="password-error-message"></span>
+                    </div>
+
+                </div>
+                <div class="field-wrapper">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-field"><input type="password" id="confirmPassword" name="confirmPassword"
+                            class="input-field" />
+                        <div class="password-icon" id="confirmPassword">
+                            <svg class="in-active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2V4M21 5L19.5 6.5M2.99997 5L4.49997 6.5M12 22C15.6042 22 18.8134 19.6545 20.8772 17.6789C22.3743 16.2458 22.3743 13.7542 20.8772 12.3211C18.8134 10.3455 15.6042 8 12 8C8.3958 8 5.18661 10.3455 3.12281 12.3211C1.62573 13.7542 1.62573 16.2458 3.12281 17.6789C5.18661 19.6545 8.3958 22 12 22ZM15 15C15 16.6569 13.6568 18 12 18C10.3431 18 8.99997 16.6569 8.99997 15C8.99997 13.3431 10.3431 12 12 12C13.6568 12 15 13.3431 15 15Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                            <svg class="active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M4.00006 4L20.0001 20M14.0001 14.2361C13.4693 14.7111 12.7684 15 12.0001 15C10.3432 15 9.00006 13.6569 9.00006 12C9.00006 11.2316 9.28891 10.5308 9.76395 10M19.6078 15.6077C20.1792 15.1103 20.6903 14.6099 21.1304 14.1469C22.29 12.9268 22.29 11.0732 21.1304 9.8531C19.1746 7.79533 15.8156 5 12.0001 5C11.1087 5 10.2422 5.15256 9.41276 5.41264M6.50006 6.80338C5.0415 7.73444 3.7977 8.87678 2.86977 9.8531C1.71016 11.0732 1.71016 12.9268 2.86977 14.1469C4.82555 16.2047 8.18455 19 12.0001 19C13.8681 19 15.6268 18.3299 17.1649 17.4044"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="error-message" id="confirmPassword-error-message"></span>
+                    </div>
+
+                </div>
+                <div class="field-wrapper">
+                    <button type="submit" aria-pressed="true">
+                        <span>Sign Up</span>
+                    </button>
+                </div>
+            </div>
+            <div class="form-footer">
+                <div>Have an account? <span><a href="/login" role="link" aria-label="Forgot Password">Sign in</a></span>
+                </div>
+                <div class="aggr-wrapper">Signing up for a IPMUGO account means you agree to the <span><a href=""
+                            role="link" aria-label="Privacy Policy">Privacy Policy</a></span> and
+                    <span><a href="" role="link" aria-label="Terms of Service">Terms of Service</a></span>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
+<script src="{{ url_for('static', filename='javascripts/validation/validation.js') }}"></script>
+<script src="{{ url_for('static', filename='javascripts/validation/password.js') }}"></script>
+</body>
+
+</html>
+{% endblock %}
