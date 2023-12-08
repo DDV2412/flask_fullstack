@@ -19,7 +19,7 @@
                     class="input-field search" />
             </div>
             <div class="field-wrapper">
-                <select class="select-field">
+                <select class="select-field" aria-label="Show Per Page">
                     <option>15</option>
                     <option>50</option>
                     <option>100</option>
@@ -30,7 +30,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID <span class="sort-icon">
+                        <th scope="row" role="rowheader">ID <span class="sort-icon">
                                 <svg class="asc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
@@ -42,7 +42,7 @@
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></span>
                         </th>
-                        <th>Title <span class="sort-icon">
+                        <th scope="row" role="rowheader">Title <span class="sort-icon">
                                 <svg class="asc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
@@ -53,7 +53,7 @@
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></span></th>
-                        <th>Journal <span class="sort-icon">
+                        <th scope="row" role="rowheader">Journal <span class="sort-icon">
                                 <svg class="asc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
@@ -64,7 +64,7 @@
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></span></th>
-                        <th>Publish Date <span class="sort-icon">
+                        <th scope="row" role="rowheader">Publish Date <span class="sort-icon">
                                 <svg class="asc" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
@@ -75,7 +75,7 @@
                                     <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></span></th>
-                        <th>Actions</th>
+                        <th scope="row" role="rowheader">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,7 +97,7 @@
 
                         <td>{{article["publish_at"]}}</td>
                         <td class="td-action">
-                            <a href="" class="btn-action action-edit">
+                            <a href="" class="btn-action action-edit" aria-label="Edit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
                                     <path

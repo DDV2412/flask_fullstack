@@ -4,9 +4,9 @@ from app.models import Submission
 
 
 class InReviewRepository:
-    def __init__(self, db):
+    def __init__(self,db):
         self.db = db
-        self.inreview_collection = db[Submission.__name__]
+        self.inreview_collection = self.db[Submission.__name__]
 
     def create_inreview(self, inreview):
         result = self.inreview_collection.insert_one(inreview)

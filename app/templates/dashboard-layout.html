@@ -21,9 +21,7 @@
     {% include 'sidebar.html' %}
     {% include 'header.html' %}
     <main>
-        {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-        {% endfor %} {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </main>
     <script src="{{ url_for('static', filename='javascripts/dashboard.js') }}"></script>
 </body>

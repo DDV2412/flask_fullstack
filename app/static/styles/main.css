@@ -1,12 +1,14 @@
 @font-face {
   font-family: "GT Walsheim Pro";
-  src: url("../fonts/walsheim-bold.woff") format("woff");
+  src: local("GT Walsheim Pro Bold"), local("GT-Walsheim-Pro-Bold"),
+    url("../fonts/walsheim-bold.woff") format("woff");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "GT Walsheim Pro";
-  src: url("../fonts/walsheim-regular.woff") format("woff");
+  src: local("GT Walsheim Pro Regular"), local("GT-Walsheim-Pro-Regular"),
+    url("../fonts/walsheim-regular.woff") format("woff");
   font-weight: 400;
 }
 

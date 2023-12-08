@@ -85,6 +85,23 @@ class RequestOAI:
 
             sources_split = sources.split(";")
 
+            journal = ""
+            volume = ""
+            issue = ""
+            pages = ""
+
+            if len(sources_split) > 0:
+                journal_split = sources_split[0].strip().split(" ")
+                journal = journal_split[1] if len(journal_split) > 1 else ""
+
+            if len(sources_split) > 1:
+                volume_split = sources_split[1].strip().split(", ")
+                volume = volume_split[0].split(" ")[1] if len(volume_split) > 0 else ""
+                issue = volume_split[1].split(" ")[1] if len(volume_split) > 1 else ""
+
+            if len(sources_split) > 2:
+                pages = sources_split[2].strip()
+
             subjectsText = ([subject.text for subject in subjects],)
 
             subjectsText = subjects[0].text if subjects else ""
@@ -120,10 +137,10 @@ class RequestOAI:
                     "doi": doi,
                     "featured": False,
                     "file_view": fileView,
-                    "journal": sources_split[0].strip(),
-                    "volume": sources_split[1].strip().split(", ")[0].split(" ")[1],
-                    "issue": sources_split[1].strip().split(", ")[1].split(" ")[1],
-                    "pages": sources_split[2].strip(),
+                    "journal": journal,
+                    "volume": volume,
+                    "issue": issue,
+                    "pages": pages,
                 }
             )
 

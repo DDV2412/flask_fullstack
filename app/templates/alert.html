@@ -1,6 +1,7 @@
-{% if success_message %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
 <div class="alert" id="alert">
-    {{ success_message }}
+    {{ messages[0] }}
     <div class="close-alert" id="close-alert">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M16.2427 7.75738L7.75739 16.2427M16.2427 16.2426L7.75739 7.75732" stroke="#28303F"
@@ -54,3 +55,4 @@
 
 </script>
 {% endif %}
+{% endwith %}

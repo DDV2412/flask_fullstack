@@ -1,5 +1,6 @@
 from datetime import datetime
 from enum import Enum
+from flask import current_app
 from jsonschema import ValidationError
 from mongoengine import (
     Document,
@@ -9,8 +10,10 @@ from mongoengine import (
     ListField,
     BooleanField,
     EmbeddedDocument,
-    EnumField, EmailField, EmbeddedDocumentField, NotUniqueError
+    EnumField, EmailField, EmbeddedDocumentField, NotUniqueError, DoesNotExist
 )
+
+
 
 class Creator(EmbeddedDocument):
     name = StringField(max_length=90, required=True)
@@ -32,6 +35,9 @@ class Journal(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
+        from app.repository.journal import JournalRepository
+        journal_repo = JournalRepository(current_app.database)
+        self.data = journal_repo
         super(Journal, self).validate(clean)
 
         required_fields = ['title', 'issn', 'e_issn', 'abbreviation', 'site_url', 'contact_detail', 'editor_in_chief']
@@ -41,25 +47,26 @@ class Journal(Document):
                 raise ValidationError(f"The {field.replace('_', ' ')} field is mandatory.")
             
         try:
-            Journal.objects.get(issn=self.issn)
-        except Journal.DoesNotExist:
+            journal_issn = self.data.find_by_issn(self.issn)
+            if(journal_issn):
+                raise ValidationError("The ISSN must be unique.")
+        except DoesNotExist:
             pass
-        except NotUniqueError:
-            raise ValidationError("The ISSN must be unique.")
-        
+
         try:
-            Journal.objects.get(site_url=self.site_url)
-        except Journal.DoesNotExist:
+            journal_eissn = self.data.find_by_eissn(self.e_issn)
+            if(journal_eissn):
+                raise ValidationError("The E-ISSN must be unique.")
+        except DoesNotExist:
             pass
-        except NotUniqueError:
-            raise ValidationError("The SITE URL must be unique.")
-        
+
         try:
-            Journal.objects.get(e_issn=self.e_issn)
-        except Journal.DoesNotExist:
+            journal_site = self.data.find_by_site(self.site_url)
+            if(journal_site):
+                raise ValidationError("The SITE URL must be unique.")
+        except DoesNotExist:
             pass
-        except NotUniqueError:
-            raise ValidationError("The EISSN must be unique.")
+
         
         length_validations = {'title': 255, 'issn': 10, 'e_issn': 10, 'abbreviation': 10}
 
@@ -98,6 +105,7 @@ class Article(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
+        db = current_app.database
         super(Article, self).validate(clean)
 
         required_fields = ['title', 'article_id', 'doi']
@@ -141,6 +149,7 @@ class Submission(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
+        db = current_app.database
         super(Submission, self).validate(clean)
 
         required_fields = ['title', 'submission_id']
@@ -180,6 +189,7 @@ class User(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
+        db = current_app.database
         super(User, self).validate(clean)
 
         required_fields = ['name', 'email', 'password']

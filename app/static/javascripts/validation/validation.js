@@ -20,40 +20,194 @@ const validationFields = [
     validationFn: isValidConfirmPassword,
     errorMessage: "Passwords do not match",
   },
-  // Add more fields as needed
+  {
+    id: "title",
+    validationFn: isRequired,
+    errorMessage: "This field is required.",
+  },
+  {
+    id: "issn",
+    validationFn: isRequired,
+    errorMessage: "This field is required.",
+  },
+  {
+    id: "e-issn",
+    validationFn: isRequired,
+    errorMessage: "This field is required.",
+  },
+  {
+    id: "abbreviation",
+    validationFn: isRequired,
+    errorMessage: "This field is required.",
+  },
+  {
+    id: "sites",
+    validationFn: isRequired,
+    errorMessage: "This field is required.",
+  },
+  {
+    id: "editor",
+    validationFn: isRequired,
+    errorMessage: "This field is required.",
+  },
 ];
 
-const form = document.querySelector("form");
+const formElements = [
+  {
+    id: "journal-add",
+    validationFields: [
+      {
+        id: "title",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "issn",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "e-issn",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "abbreviation",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "sites",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "editor",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "email",
+        validationFn: isValidEmail,
+        errorMessage: "Invalid email address",
+      },
+      {
+        id: "thumbnail_image",
+      },
+      {
+        id: "main_image",
+      },
+      {
+        id: "short_summary",
+      },
+      {
+        id: "description",
+      },
+    ],
+  },
+  {
+    id: "journal-edit",
+    validationFields: [
+      {
+        id: "title",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "issn",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "e-issn",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "abbreviation",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "sites",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "editor",
+        validationFn: isRequired,
+        errorMessage: "This field is required.",
+      },
+      {
+        id: "email",
+        validationFn: isValidEmail,
+        errorMessage: "Invalid email address",
+      },
+      {
+        id: "thumbnail_image",
+      },
+      {
+        id: "main_image",
+      },
+      {
+        id: "short_summary",
+      },
+      {
+        id: "description",
+      },
+    ],
+  },
+  {
+    id: "delete_journal",
+    validationFields: [
+      {
+        id: "journal_id",
+      },
+    ],
+  },
+  {
+    id: "sync_journal",
+    validationFields: [
+      {
+        id: "journal_id",
+      },
+    ],
+  },
+];
 
-if (form) {
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    clearErrorMessages();
+formElements.forEach((formData) => {
+  const form = document.getElementById(formData["id"]);
 
-    let isFormValid = true;
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      clearErrorMessages();
 
-    validationFields.forEach((field) => {
-      const inputElement = document.getElementById(field.id);
-      const errorMessageElement = document.getElementById(
-        `${field.id}-error-message`
-      );
+      let isFormValid = true;
 
-      if (inputElement) {
-        const isValid = field.validationFn(inputElement.value);
-        if (!isValid) {
-          errorMessageElement.textContent = field.errorMessage;
-          isFormValid = false;
+      formData["validationFields"].forEach((field) => {
+        if (field.validationFn) {
+          const inputElement = document.getElementById(field.id);
+          const errorMessageElement = document.getElementById(
+            `${field.id}-error-message`
+          );
+
+          if (inputElement) {
+            const isValid = field.validationFn(inputElement.value);
+            if (!isValid) {
+              errorMessageElement.textContent = field.errorMessage;
+              isFormValid = false;
+            }
+          }
         }
+      });
+
+      if (isFormValid) {
+        form.submit();
       }
     });
-
-    if (isFormValid) {
-      console.log("Form is valid. Submitting...");
-      // Uncomment the next line to submit the form
-      // form.submit();
-    }
-  });
-}
+  }
+});
 
 function clearErrorMessages() {
   validationFields.forEach((field) => {
@@ -65,8 +219,6 @@ function clearErrorMessages() {
     }
   });
 }
-
-// Rest of your validation functions...
 
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

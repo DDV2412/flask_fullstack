@@ -21,8 +21,12 @@ def create_app():
 
     app.config['MONGODB_URI'] = os.getenv("MONGODB_URI")
 
+    app.secret_key = os.getenv("SECRET")
+
+
     try:
         client = MongoClient(app.config['MONGODB_URI'])
+
         db = client.get_database()
         app.logger.info("Connected to the database successfully.")
     except Exception as e:
@@ -33,6 +37,8 @@ def create_app():
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    app.database = db
 
     # Initialize repositories
     inreview_repository = InReviewRepository(db)

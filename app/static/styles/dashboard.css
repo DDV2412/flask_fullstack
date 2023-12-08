@@ -1,12 +1,14 @@
 @font-face {
   font-family: "GT Walsheim Pro";
-  src: url("../fonts/walsheim-bold.woff") format("woff");
+  src: local("GT Walsheim Pro Bold"), local("GT-Walsheim-Pro-Bold"),
+    url("../fonts/walsheim-bold.woff") format("woff");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "GT Walsheim Pro";
-  src: url("../fonts/walsheim-regular.woff") format("woff");
+  src: local("GT Walsheim Pro Regular"), local("GT-Walsheim-Pro-Regular"),
+    url("../fonts/walsheim-regular.woff") format("woff");
   font-weight: 400;
 }
 
@@ -213,14 +215,14 @@ a {
   text-transform: capitalize;
   font-size: 0.875rem;
   padding: 0.5rem 0.75rem;
-  opacity: 0.4;
+  opacity: 0.8;
   cursor: none;
 }
 
 .copy-right {
   font-size: 0.875rem;
   color: var(--text-color);
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
 .header-wrapper {
@@ -329,14 +331,20 @@ a {
 }
 
 .nav-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  opacity: 0.4;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  color: var(--text-color);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  padding: 0.25rem;
+  opacity: 0.6;
+}
+
+.nav-icon svg {
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nav-icon:hover {
   color: var(--primary-color);

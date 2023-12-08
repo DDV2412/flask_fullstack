@@ -6,7 +6,7 @@ from app.models import Article
 class ArticleRepository:
     def __init__(self, db):
         self.db = db
-        self.article_collection = db[Article.__name__]
+        self.article_collection = self.db[Article.__name__]
 
     def create_article(self, article):
         result = self.article_collection.insert_one(article)

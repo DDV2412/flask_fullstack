@@ -5,10 +5,11 @@
 <section class="section_dashboard">
     <div class="title-wrapper">
         <h2>Edit Journal</h2>
+        {% include 'alert.html'%}
     </div>
 
     <div class="content-wrapper">
-        <div class="form-content">
+        <form method="post" class="form-content" id="journal-edit">
             <div class="field-wrapper">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" class="input-field" value="{{journal['title']}}" />
@@ -140,8 +141,9 @@
                 <button type="submit" aria-pressed="true">
                     <span>Save</span>
                 </button>
+                <span class="error-message" id="global-error-message"></span>
             </div>
-        </div>
+        </form>
     </div>
 
 </section>

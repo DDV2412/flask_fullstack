@@ -1,6 +1,6 @@
 # auth.py
 
-from flask import Blueprint, current_app, redirect, render_template, request, url_for
+from flask import Blueprint, current_app, flash, jsonify, redirect, render_template, request, url_for
 
 from app.utils.scrapping_article import RequestOAI
 from app.models import Journal as JournalModel
@@ -18,47 +18,68 @@ class Journal:
         @self.blueprint.route('/journal', methods=['GET', 'POST'])
         def journal():
             success_message = None
-                
+
             if request.method == 'POST':
-                journal_id = request.form.get('journal_id')
-                delete_id = request.form.get('delete_id')
+                journal_id = request.form.get()['journal_id']
 
-                if delete_id:
-                    self.journal_service.delete_journal(delete_id)
-                    success_message = f'Journal successfully deleted with ID: {delete_id}'
+                try:
+                    self.journal_service.delete_journal(journal_id)
+                    success_message = f'Journal successfully deleted with ID: {journal_id}'
 
+                    flash(success_message)
+                except Exception as error:
+                    success_message = f'{str(error)}'
 
-                if journal_id :
-                    try:
-                        journal = self.journal_service.find_by_id(journal_id)
+                    flash(success_message)
 
-                        request_instance = RequestOAI(request)
-
-                        results = request_instance.request_oai(
-                        journal["site_url"], journal["abbreviation"])
-
-                        for result in results["results"]:
-                            doi = result.get("doi")
-                            if doi is None or not doi.strip():
-                                continue
-
-                            # Set journal info into each result
-                            result["journal"] = journal
-
-                            self.article_service.create_or_update_article(result)
-
-                        success_message = f'Request OAI successfully with counts: {len(results["results"])}'
-                    except Exception as error:
-                        print(f'An unexpected error occurred: {str(error)}')
-                        success_message = f'An unexpected error occurred: {str(error)}'
 
             journals = self.journal_service.get_all_journals()
 
-            return render_template('dashboard/journal/index.html', journals=journals, success_message=success_message)
+            return render_template('dashboard/journal/index.html', journals=journals)
         
+
+        @self.blueprint.route('/journal/sync', methods=['POST'])
+        def sync_journal():
+            success_message = None
+            status_code = 200
+            journal_id = request.form.get()['journal_id']
+                    
+            try:
+                journal = self.journal_service.find_by_id(journal_id)
+
+                request_instance = RequestOAI(request)
+
+                results = request_instance.request_oai(
+                journal["site_url"], journal["abbreviation"])
+
+                for result in results["results"]:
+                    doi = result.get("doi")
+                    if doi is None or not doi.strip():
+                        continue
+
+                    # Set journal info into each result
+                    result["journal"] = journal
+
+                    self.article_service.create_or_update_article(result)
+
+                success_message = f'Request OAI successfully with counts: {len(results["results"])}'
+                status_code = 200
+            except Exception as error:
+                print(f'{str(error)}')
+                success_message = f'{str(error)}'
+                status_code = 400
+
+                return jsonify({'error_message': success_message}), status_code
+
+            return jsonify({'message': success_message}), status_code
+ 
+        
+
         @self.blueprint.route('/journal/add', methods=['GET', 'POST'])
         def add_journal():
             success_message = None
+            status_code = 200
+            
             if request.method == 'POST':
                 data = {
                     'title' : request.form.get('title'),
@@ -71,7 +92,7 @@ class Journal:
                     'main_image' : request.form.get('main_image'),
                     'thumbnail_image': request.form.get('thumbnail_image'),
                     'contact_detail' : request.form.get('email'),
-                    'editor_in_chief' : request.form.get('editor'),
+                    'editor_in_chief' : request.form.get('editor')
                 }
                 
                 try:
@@ -80,12 +101,14 @@ class Journal:
                     journal_dict.validate()
                     journal = self.journal_service.create_journal(data)
                     success_message = f'Journal successfully created with ID: {journal}'
+                    flash(success_message)
 
                 except Exception as error:
-                    success_message = f'An unexpected error occurred: {str(error)}'
+                    success_message = f'{str(error)}'
+                    flash(success_message)
+            
+            return render_template('dashboard/journal/add.html')
 
-
-            return render_template('dashboard/journal/add.html', success_message=success_message)
         
         @self.blueprint.route('/journal/<id>/edit', methods=['GET', 'POST'])
         def edit_journal(id):
@@ -104,17 +127,23 @@ class Journal:
                     'main_image' : request.form.get('main_image'),
                     'thumbnail_image': request.form.get('thumbnail_image'),
                     'contact_detail' : request.form.get('email'),
-                    'editor_in_chief' : request.form.get('editor'),
+                    'editor_in_chief' : request.form.get('editor')
                 }
                 
                 try:
-                    journal = self.journal_service.update_journal(data)
-                    success_message = f'Journal successfully updated with ID: {journal}'
+                    journal = self.journal_service.update_journal(journal['_id'],data)
+                    success_message = f'Journal successfully updated with ID: {id}'
+
+                    flash(success_message)
+
+
+                    return redirect(url_for('journal.journal'))
 
                 except Exception as error:
-                    success_message = f'An unexpected error occurred: {str(error)}'
+                    success_message = f'{str(error)}'
+                    flash(success_message)
                     
-            return render_template('dashboard/journal/edit.html', journal=journal, success_message = success_message)
+            return render_template('dashboard/journal/edit.html', journal=journal)
 
         
     
