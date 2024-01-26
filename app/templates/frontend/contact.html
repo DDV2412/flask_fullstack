@@ -1,0 +1,98 @@
+{% extends 'frontend/layout/main-layout.html' %}
+{% block html %}
+<html data-wf-page="659fa9b99f7ba4cee4e74a55" data-wf-site="659ac690a512d75c923b3d93" lang="en">
+{% endblock %}
+{% block header %}
+{% block meta_title %}Home {% endblock %}
+{% block meta_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block og_title %}Home {% endblock %}
+{% block og_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block twitter_title %}Home {% endblock %}
+{% block twitter_description %}Access the latest knowledge in applied science, electrical engineering, computer science
+and information technology,
+education, and health. {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+<section class="section_hero-about">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div class="hero_about-wrapper">
+        <div class="hero_about-detail">
+          <div class="max-width-medium">
+            <div class="margin-bottom margin-small">
+              <h1 data-w-id="c6008726-a807-f06d-0ad2-0b8153800e01" style="opacity:0"
+                class="heading-style-h1 text-color-white">Contact</h1>
+            </div>
+            <h2 data-w-id="b827f36e-4fce-1e68-3111-5217413cdb32" style="opacity:0"
+              class="text-size-medium text-weight-regular text-color-secondary_100">Access the latest knowledge in
+              applied science, electrical engineering, computer science and information technology, education, and
+              health.</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section_contact">
+  <div class="container-large">
+    <div class="padding-section-large">
+      <div class="contact-wrapper">
+        <div id="w-node-fee5bb52-07b2-6866-c2c4-d1bc32c91034-e4e74a55" class="contact_detail-wrapper">
+          <p data-w-id="afef5b24-f2ac-3de2-8fe5-51e9970aff14" style="opacity:0">Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Suspendisse varius enim in eros elementum tristique. </p>
+          <div class="contact_detail">
+            <div data-w-id="02f09782-57b0-4715-9f72-3f2b2c505390" style="opacity:0" class="contact_social-wrapper">
+              <div class="contact_icon-wrapper"><img src="{{url_for('static', filename='images/Location.webp')}}"
+                  loading="lazy" width="66" height="78" alt="Location Icon" class="contact-icon"></div>
+              <div class="contact_detail-text">
+                <h3 class="text-color-secondary_900 text-weight-medium text-size-medium">Address</h3>
+                <div class="text-size-small">Jl. Sukun Raya Jl. Sanggrahan No.RT 09, Modalan, Banguntapan, Kec.
+                  Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198</div>
+              </div>
+            </div>
+            <div data-w-id="d41e4b41-4142-ad3f-ac56-a0199a41a0df" style="opacity:0" class="contact_social-wrapper">
+              <div class="contact_icon-wrapper"><img src="{{url_for('static', filename='images/Call.webp')}}"
+                  loading="lazy" width="96" height="96" alt="Phone Icon" class="contact-icon"></div>
+              <div class="contact_detail-text">
+                <h3 class="text-color-secondary_900 text-weight-medium text-size-medium">Phone</h3>
+                <div class="text-size-small">(0274) 4331796</div>
+              </div>
+            </div>
+            <div data-w-id="b79d22c5-5c67-4b17-e8af-dd105aaa0e22" style="opacity:0" class="contact_social-wrapper">
+              <div class="contact_icon-wrapper"><img src="{{url_for('static', filename='images/Message.webp')}}"
+                  loading="lazy" width="86" height="78" alt="Message Icon" class="contact-icon"></div>
+              <div class="contact_detail-text">
+                <h3 class="text-color-secondary_900 text-weight-medium text-size-medium">Email</h3>
+                <div class="text-size-small">example@ipmugo.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="w-node-_73de18ca-1f27-b92c-56fa-84e5ac5bf4d0-e4e74a55" data-w-id="73de18ca-1f27-b92c-56fa-84e5ac5bf4d0"
+          style="opacity:0" class="contact_form-wrapper w-form">
+          <form id="email-form" name="email-form" data-name="Email Form" method="get" class="contact-form"
+            data-wf-page-id="659fa9b99f7ba4cee4e74a55" data-wf-element-id="73de18ca-1f27-b92c-56fa-84e5ac5bf4d1">
+            <div class="field-wrapper"><label for="name">Name</label><input class="field-input w-input" maxlength="256"
+                name="name" data-name="Name" placeholder="" type="text" id="name"></div>
+            <div class="field-wrapper"><label for="email">Email</label><input class="field-input w-input"
+                maxlength="256" name="email" data-name="Email" placeholder="" type="email" id="email" required=""></div>
+            <div class="field-wrapper"><label for="Subject">Subject</label><input class="field-input w-input"
+                maxlength="256" name="Subject" data-name="Subject" placeholder="" type="text" id="Subject"></div>
+            <div class="field-wrapper"><label for="name-2">Message</label><textarea id="Message" name="Message"
+                maxlength="5000" data-name="Message" placeholder="" class="field-input w-input"></textarea></div><input
+              type="submit" data-wait="Please wait..." class="button-primary w-button" value="Send Message">
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%include 'frontend/components/cta.html'%}
+{% endblock %}

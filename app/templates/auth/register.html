@@ -3,7 +3,8 @@
 {% endblock %} {% block content %}
 <section class="section_auth">
     <div class="container">
-        <form method="post" class="auth-wrapper">
+        {% include 'alert.html'%}
+        <form method="post" class="auth-wrapper" id="register">
             <div class="form-header">
                 <div class="form-image-wrapper">
                     <picture class="form-picture">

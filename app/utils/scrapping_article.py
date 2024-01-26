@@ -95,9 +95,12 @@ class RequestOAI:
                 journal = journal_split[1] if len(journal_split) > 1 else ""
 
             if len(sources_split) > 1:
-                volume_split = sources_split[1].strip().split(", ")
-                volume = volume_split[0].split(" ")[1] if len(volume_split) > 0 else ""
-                issue = volume_split[1].split(" ")[1] if len(volume_split) > 1 else ""
+                volume_issue_split = sources_split[1].strip().split(", ")
+                if len(volume_issue_split) > 0:
+                    volume = volume_issue_split[0].split(" ")[1] if volume_issue_split[0] else ""
+                if len(volume_issue_split) > 1:
+                    issue = volume_issue_split[1].split(" ")[1] if volume_issue_split[1] else ""
+                    issue = ''.join(filter(str.isdigit, issue))
 
             if len(sources_split) > 2:
                 pages = sources_split[2].strip()

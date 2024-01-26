@@ -1,5 +1,6 @@
 # repository.py
 
+from bson import ObjectId
 from app.models import Submission
 
 
@@ -13,5 +14,16 @@ class InReviewRepository:
         return result.inserted_id
 
     def get_all_inreviews(self):
-        inreviews = self.inreview_collection.find()
-        return list(inreviews)
+        inreviews = self.inreview_collection.find().limit(15)
+        return inreviews
+    
+    def find_by_id(self, submission_id):
+        return self.inreview_collection.find_one({"_id": ObjectId(submission_id)})
+    
+    def find_by_submission_id(self, submission_id):
+        return self.inreview_collection.find_one({"submission_id": submission_id})
+    
+
+    def update_inreview(self, submission_id, updates):
+        return self.inreview_collection.update_one({"_id": ObjectId(submission_id)}, {"$set": updates})
+

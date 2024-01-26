@@ -1,0 +1,39 @@
+{% extends 'frontend/layout/main-layout.html' %}
+{% block html %}
+<html data-wf-page="659faac2c82ac7a4e7de4c05" data-wf-site="659ac690a512d75c923b3d93" lang="en">
+{% endblock %}
+{% block header %}
+{% block meta_title %}Not Found {% endblock %}
+{% block meta_description %}Not Found {% endblock %}
+{% block og_title %}Not Found {% endblock %}
+{% block og_description %}Not Found {% endblock %}
+{% block twitter_title %}Not Found {% endblock %}
+{% block twitter_description %}Not Found {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+<section class="section_hero-404">
+  <div class="hero_404-wrapper">
+    <div class="hero_404-detail">
+      <div class="max-width-medium">
+        <div class="margin-bottom margin-small"><img class="_404_image"
+            src="{{url_for('static', filename='images/error-404-8808966-1.webp')}}" alt="404 Image" style="opacity:0"
+            sizes="(max-width: 479px) 100vw, 400px" data-w-id="924b2e0a-5b31-ccf5-3146-b08cc2bd4b95" loading="eager"
+            srcset="{{url_for('static', filename='images/error-404-8808966-1-p-500.png')}} 500w, {{url_for('static', filename='images/error-404-8808966-1-p-800.png')}} 800w, {{url_for('static', filename='images/error-404-8808966-1.webp')}} 1113w">
+        </div>
+        <h1 data-w-id="281deb75-671d-2ebd-bb8c-b089e75401df" style="opacity:0"
+          class="text-size-small text-weight-light text-color-white">Oops! The page you&#x27;re looking for can&#x27;t
+          be found. It seems like you&#x27;ve wandered into the digital wilderness. We apologize for any inconvenience.
+          Please double-check the URL or navigate back to the homepage. If the issue persists, feel free to reach out to
+          our support team for further assistance. Thank you for your patience!</h1>
+      </div>
+      <div data-w-id="a4df55f8-3d93-e089-b545-6eba4d58c034" style="opacity:0" class="button-group justify-center">
+        <a href="index.html" class="button-secondary w-inline-block">
+          <div>Back to Home</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

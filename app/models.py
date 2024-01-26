@@ -10,7 +10,7 @@ from mongoengine import (
     ListField,
     BooleanField,
     EmbeddedDocument,
-    EnumField, EmailField, EmbeddedDocumentField, NotUniqueError, DoesNotExist
+    EnumField, EmailField, EmbeddedDocumentField, DoesNotExist
 )
 
 
@@ -105,7 +105,9 @@ class Article(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
-        db = current_app.database
+        from app.repository.article import ArticleRepository
+        article_repo = ArticleRepository(current_app.database)
+        self.data = article_repo
         super(Article, self).validate(clean)
 
         required_fields = ['title', 'article_id', 'doi']
@@ -115,11 +117,11 @@ class Article(Document):
                 raise ValidationError(f"The {field.replace('_', ' ')} field is mandatory.")
             
         try:
-            Article.objects.get(doi=self.doi)
-        except Article.DoesNotExist:
+            article_doi = self.data.find_by_doi(self.doi)
+            if(article_doi):
+                raise ValidationError("The DOI must be unique.")
+        except DoesNotExist:
             pass
-        except NotUniqueError:
-            raise ValidationError("The DOI must be unique.")
         
         length_validations = {'title': 255, 'article_id': 10}
 
@@ -135,13 +137,13 @@ class Article(Document):
 
 class SubmissionActionEnum(Enum):
     INREVIEW = 'inreview'
-    ACCEPT = 'accept'
+    DECLINE = 'decline'
     REJECT = 'reject'
 
 class Submission(Document):
     submission_id = StringField(max_length=10, required=True)
     title = StringField(max_length=255, required=True)
-    journal = ReferenceField(Journal)
+    journal_name = StringField()
     authors = StringField()
     action = EnumField(SubmissionActionEnum, default=SubmissionActionEnum.INREVIEW)
     date_submitted = StringField()
@@ -149,7 +151,9 @@ class Submission(Document):
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
-        db = current_app.database
+        from app.repository.in_review import InReviewRepository
+        in_review = InReviewRepository(current_app.database)
+        self.data = in_review
         super(Submission, self).validate(clean)
 
         required_fields = ['title', 'submission_id']
@@ -158,7 +162,6 @@ class Submission(Document):
             if not value:
                 raise ValidationError(f"The {field.replace('_', ' ')} field is mandatory.")
             
-
         
         length_validations = {'title': 255, 'submission_id': 10}
 
@@ -182,14 +185,16 @@ class UserRole(Enum):
 class User(Document):
     name = StringField(required=True, max_length=90)
     email = EmailField(required=True, unique=True)
-    password = StringField(required=True, min_length=8, max_length=10)
+    password = StringField(required=True, min_length=8)
     user_role = EnumField(UserRole, default=UserRole.READER)
     profile = StringField()
     created_at = DateTimeField(default=datetime.utcnow)
     updated_at = DateTimeField(default=datetime.utcnow)
 
     def validate(self, clean=True):
-        db = current_app.database
+        from app.repository.user import UserRepository
+        user_repo = UserRepository(current_app.database)
+        self.data = user_repo
         super(User, self).validate(clean)
 
         required_fields = ['name', 'email', 'password']
@@ -199,13 +204,13 @@ class User(Document):
                 raise ValidationError(f"The {field.replace('_', ' ')} field is mandatory.")
             
         try:
-            User.objects.get(email=self.email)
-        except User.DoesNotExist:
+            user_email = self.data.find_by_email(self.email)
+            if(user_email):
+                raise ValidationError("The EMAIL must be unique.")
+        except DoesNotExist:
             pass
-        except NotUniqueError:
-            raise ValidationError("The EMAIL must be unique.")
         
-        length_validations = {'name': 90, 'password': 10}
+        length_validations = {'name': 90}
 
         for field, max_length in length_validations.items():
             value = getattr(self, field, None)
@@ -215,3 +220,6 @@ class User(Document):
             min_length = getattr(self, f"min_{field}", None)
             if min_length is not None and value and len(value) < min_length:
                 raise ValidationError(f"The {field.replace('_', ' ')} field must be at least {min_length} characters.")
+            
+        if not self.user_role:
+            self.user_role = UserRole.READER.value

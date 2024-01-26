@@ -8,17 +8,44 @@ class ArticleService:
         article_id = self.article_repository.create_article(article)
         return article_id
     
-    def get_all_articles(self):
-        return self.article_repository.find_all_articles()
+    def get_all_articles(self,
+        page,
+        per_page,
+        search,
+        sort_field,
+        sort_order,
+        subject_filter,
+        journal_filter,
+        author_filter,
+        singleYear,
+        minYear,
+        maxYear,
+        searchWithin,
+        featured,
+        advancedQuery,):
+        return self.article_repository.find_all_articles(page,
+            per_page,
+            search,
+            sort_field,
+            sort_order,
+            subject_filter,
+            journal_filter,
+            author_filter,
+            singleYear,
+            minYear,
+            maxYear,
+            searchWithin,
+            featured,
+            advancedQuery,)
     
     def find_by_id(self, article_id):
         return self.article_repository.find_by_id(article_id)
     
     def update_article(self, article_id, updates):
-        self.article_repository.update_article(article_id, updates)
+        return self.article_repository.update_article(article_id, updates)
 
     def delete_article(self, article_id):
-        self.article_repository.delete_article(article_id)
+        return self.article_repository.delete_article(article_id)
 
     def create_or_update_article(self, article):
         doi = article.get("doi")

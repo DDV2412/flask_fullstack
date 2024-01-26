@@ -8,16 +8,23 @@ from pymongo import MongoClient
 from app.repository.article import ArticleRepository
 from app.repository.in_review import InReviewRepository
 from app.repository.journal import JournalRepository
+from app.repository.user import UserRepository
 from app.routers import init_router
 from app.service.article import ArticleService
 from app.service.in_review import InReviewService
 from app.service.journal import JournalService
 from dotenv import load_dotenv
 
+from app.service.user import UserService
+
 load_dotenv()
 
 def create_app():
     app = Flask(__name__)
+
+    @app.template_filter()
+    def format_number(value):
+        return "{:,}".format(value)
 
     app.config['MONGODB_URI'] = os.getenv("MONGODB_URI")
 
@@ -44,11 +51,13 @@ def create_app():
     inreview_repository = InReviewRepository(db)
     journal_repository = JournalRepository(db)
     article_repository = ArticleRepository(db)
+    user_repository = UserRepository(db)
 
     # Initialize services
     inreview_service = InReviewService(inreview_repository)
     journal_service = JournalService(journal_repository)
     article_service = ArticleService(article_repository)
+    user_service = UserService(user_repository)
 
     # Register services with the current app context
     with app.app_context():
@@ -56,6 +65,7 @@ def create_app():
             'inreview': inreview_service,
             'journal': journal_service,
             'article': article_service,
+            'user': user_service,
         }
 
     # Initialize routers
@@ -65,6 +75,8 @@ def create_app():
     configure_logging(app)
 
     return app
+
+
 
 def configure_logging(app):
     try:

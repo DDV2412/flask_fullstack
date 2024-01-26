@@ -1,0 +1,97 @@
+{% extends 'frontend/layout/main-layout.html' %}
+{% block html %}
+<html data-wf-page="659fa9aba7d2044d28811ffb" data-wf-site="659ac690a512d75c923b3d93" lang="en">
+{% endblock %}
+{% block header %}
+{% block meta_title %}Home {% endblock %}
+{% block meta_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block og_title %}Home {% endblock %}
+{% block og_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block twitter_title %}Home {% endblock %}
+{% block twitter_description %}Access the latest knowledge in applied science, electrical engineering, computer science
+and information technology,
+education, and health. {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+<section class="section_hero-articles">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div class="hero_articles-wrapper">
+        <div class="hero_articles-detail">
+          <div class="max-width-medium">
+            <div class="margin-bottom margin-small">
+              <h1 data-w-id="c6008726-a807-f06d-0ad2-0b8153800e01" style="opacity:0"
+                class="heading-style-h1 text-color-white">Publications</h1>
+            </div>
+            <h2 data-w-id="b827f36e-4fce-1e68-3111-5217413cdb32" style="opacity:0"
+              class="text-size-medium text-weight-regular text-color-secondary_100">Access the latest knowledge in
+              applied science, electrical engineering, computer science and information technology, education, and
+              health.</h2>
+          </div>
+          <div class="max-width-medium">
+            <div data-w-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5b" style="opacity:0" class="form_search-block w-form">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="search_home-form"
+                data-wf-page-id="659fa9aba7d2044d28811ffb" data-wf-element-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5c">
+                <input class="search_input-field w-input" maxlength="256" name="Search" data-name="Search"
+                  placeholder="Search for publication title ...." type="text" id="Search"><input type="submit"
+                  data-wait="" class="search_home-submit w-button" value="Search">
+              </form>
+
+            </div>
+            <div data-w-id="977685db-9e01-4f30-edde-010b18a8e541" style="opacity:0" class="button-group justify-end">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section_publication">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div class="publication_collection-wrapper w-dyn-list">
+        {% for journal in journals%}
+        <div role="list" class="publication_list-wrapper w-dyn-items">
+          <div data-w-id="2117eca6-136e-ffb8-ed3f-67ca8d2dd3b2" style="opacity:0" role="listitem"
+            class="publication-wrapper w-dyn-item">
+            <div class="publication_thumbnail-wrapper"><img alt="" loading="lazy" src="{{journal['thumbnail_image']}}"
+                class="publication-thumbnail">
+            </div>
+            <div class="publication_detail-wrapper">
+              <div class="publication_title-wrapper">
+                <h3 class="text-size-large text-weight-semibold text-color-secondary_900">{{journal['title']}}</h3>
+                <div class="line-clamp-5">{{ journal['short_summary'] | safe }}</div>
+                <div class="issn-wrapper">
+                  <div class="issn_content-wrapper">
+                    <div>ISSN : {{journal['issn']}}</div>
+                  </div>
+                  <div class="issn_content-wrapper">
+                    <div>EISSN : {{journal['e_issn']}}</div>
+                  </div>
+                </div>
+              </div>
+              <a href="{{ url_for('publications.publication_detail', id=journal['_id']) }}"
+                class="button-primary w-inline-block">
+                <div>Read More</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+        {% if journals|length == 0%}
+        <div class="w-dyn-empty">
+          <div>No items found.</div>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</section>
+{%include 'frontend/components/cta.html'%}
+{% endblock %}

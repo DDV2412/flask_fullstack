@@ -5,13 +5,17 @@
 <section class="section_dashboard">
     <div class="title-wrapper">
         <h2>In Review</h2>
-        <a href="" class="btn-add" role="link" aria-label="Update Submission"><svg xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                    d="M12 9V11.382C12 11.7607 12.214 12.107 12.5528 12.2764L14 13M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM19 12C19 15.866 15.866 19 12 19C8.13401 19 5 15.866 5 12C5 8.13401 8.13401 5 12 5C15.866 5 19 8.13401 19 12Z"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-            </svg>
-            <span>Update</span></a>
+
+        <form method="post" id="submission_update" action="{{ url_for('submission.update_submission') }}">
+            <button type="submit" class="btn-add" role="link" aria-label="Update Submission"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M12 9V11.382C12 11.7607 12.214 12.107 12.5528 12.2764L14 13M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM19 12C19 15.866 15.866 19 12 19C8.13401 19 5 15.866 5 12C5 8.13401 8.13401 5 12 5C15.866 5 19 8.13401 19 12Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <span>Update</span></button>
+        </form>
+        {% include 'alert.html'%}
     </div>
     <div class="content-wrapper">
         <div class="content-head">
@@ -85,32 +89,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>IJAAS</td>
-                        <td>IAAS</td>
-                        <td>111</td>
+                    {% for submission in submissions %}
+                    <tr
+                        class="{% if submission['action'] == 'reject' %}row-reject{% elif submission['action'] == 'decline' %} row-decline{% endif %}">
+                        <td>{{submission['submission_id']}}</td>
+                        <td>{{submission['title']}}{{submission['action']}}</td>
+                        <td>{{submission['journal_name']}}</td>
+                        <td>{{submission['date_submitted']}}</td>
                         <td class="td-action">
-                            <button type="button" class="btn-action action-edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <path
-                                        d="M8.75234 21H19M11.7844 5.31171C11.7844 5.31171 11.7844 6.94634 13.419 8.58096C15.0537 10.2156 16.6883 10.2156 16.6883 10.2156M5.31963 17.9881L8.75234 17.4977C9.2475 17.4269 9.70636 17.1975 10.06 16.8438L18.3229 8.58096C19.2257 7.67818 19.2257 6.21449 18.3229 5.31171L16.6883 3.67708C15.7855 2.77431 14.3218 2.77431 13.419 3.67708L5.15616 11.94C4.80248 12.2936 4.57305 12.7525 4.50231 13.2477L4.01193 16.6804C3.90295 17.4432 4.5568 18.097 5.31963 17.9881Z"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
-                            </button>
-
-
-
+                            <form method="post" action="{{ url_for('submission.delete_submission') }}">
+                                <input type="hidden" id="action" value="reject" name="action" />
+                                <input type="hidden" name="submission_id" id="submission_id"
+                                    value="{{submission['_id']}}" />
+                                <button type="submit">
+                                    Reject
+                                </button>
+                            </form>
+                            <form method="post" action="{{ url_for('submission.delete_submission') }}">
+                                <input type="hidden" id="action" value="decline" name="action" />
+                                <input type="hidden" name="submission_id" id="submission_id"
+                                    value="{{submission['_id']}}" />
+                                <button type="submit">
+                                    Decline
+                                </button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>IJAAS</td>
-                        <td>IAAS</td>
-                        <td>111</td>
-                        <td>Edit</td>
-                    </tr>
+                    {%endfor%}
                 </tbody>
             </table>
         </div>

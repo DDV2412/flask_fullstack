@@ -18,7 +18,7 @@ class JournalRepository:
     
 
     def find_all_journals(self):
-        journals = list(self.journal_collection.find({}))
+        journals = list(self.journal_collection.find().limit(15))
 
         random.shuffle(journals)
 
@@ -37,7 +37,7 @@ class JournalRepository:
         return self.journal_collection.find_one({"site_url": site})
     
     def update_journal(self, journal_id, updates):
-        self.journal_collection.update_one({"_id": ObjectId(journal_id)}, {"$set": updates})
+        return self.journal_collection.update_one({"_id": ObjectId(journal_id)}, {"$set": updates})
 
     def delete_journal(self, journal_id):
-        self.journal_collection.delete_one({"_id": ObjectId(journal_id)})
+        return self.journal_collection.delete_one({"_id": ObjectId(journal_id)})

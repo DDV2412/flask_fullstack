@@ -5,13 +5,81 @@
 <section class="section_dashboard">
     <div class="title-wrapper">
         <h2>Users</h2>
-        <a href="" class="btn-add" role="link" aria-label="Add New User"><svg xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" viewBox="0 0 24 24" fill="none">
+        {% include 'alert.html'%}
+        <button id="open-modal" class="btn-add" role="link" aria-label="Add New User"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
                     d="M10 18C10 19.1046 10.8954 20 12 20C13.1046 20 14 19.1046 14 18V14H18C19.1046 14 20 13.1046 20 12C20 10.8954 19.1046 10 18 10H14V6C14 4.89543 13.1046 4 12 4C10.8954 4 10 4.89543 10 6V10L6 10C4.89543 10 4 10.8954 4 12C4 13.1046 4.89543 14 6 14L10 14V18Z"
                     stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
             </svg>
-            <span>Add New</span></a>
+            <span>Add New</span></button>
+
+        <div class="modal" id="modal">
+            <div class="modal-wrapper">
+                <div class="modal-header">
+                    <div id="modal-title">Create User</div>
+                    <button type="button" class="btn-action action-edit" id="close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form method="post" class="modal-body" id="create-user">
+                    <div class="field-wrapper">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="input-field" />
+                        <span class="error-message" id="name-error-message"></span>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="input-field" />
+                        <span class="error-message" id="email-error-message"></span>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="password">Password</label>
+                        <div class="password-field"><input type="password" id="password" name="password"
+                                class="input-field" />
+                            <div class="password-icon" id="password">
+                                <svg class="in-active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 2V4M21 5L19.5 6.5M2.99997 5L4.49997 6.5M12 22C15.6042 22 18.8134 19.6545 20.8772 17.6789C22.3743 16.2458 22.3743 13.7542 20.8772 12.3211C18.8134 10.3455 15.6042 8 12 8C8.3958 8 5.18661 10.3455 3.12281 12.3211C1.62573 13.7542 1.62573 16.2458 3.12281 17.6789C5.18661 19.6545 8.3958 22 12 22ZM15 15C15 16.6569 13.6568 18 12 18C10.3431 18 8.99997 16.6569 8.99997 15C8.99997 13.3431 10.3431 12 12 12C13.6568 12 15 13.3431 15 15Z"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                                <svg class="active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M4.00006 4L20.0001 20M14.0001 14.2361C13.4693 14.7111 12.7684 15 12.0001 15C10.3432 15 9.00006 13.6569 9.00006 12C9.00006 11.2316 9.28891 10.5308 9.76395 10M19.6078 15.6077C20.1792 15.1103 20.6903 14.6099 21.1304 14.1469C22.29 12.9268 22.29 11.0732 21.1304 9.8531C19.1746 7.79533 15.8156 5 12.0001 5C11.1087 5 10.2422 5.15256 9.41276 5.41264M6.50006 6.80338C5.0415 7.73444 3.7977 8.87678 2.86977 9.8531C1.71016 11.0732 1.71016 12.9268 2.86977 14.1469C4.82555 16.2047 8.18455 19 12.0001 19C13.8681 19 15.6268 18.3299 17.1649 17.4044"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <span class="error-message" id="password-error-message"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="title">Role</label>
+                        <select name="role" id="role" class="input-field">
+                            <option>Select Role</option>
+                            <option value="jm">Journal Manager</option>
+                            <option value="reader">Reader</option>
+                            <option value="author">Author</option>
+                        </select>
+                        <span class="error-message" id="role-error-message"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn-add" role="link" aria-label="Add New User">Save
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
     <div class="content-wrapper">
         <div class="content-head">
@@ -65,42 +133,133 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {%for user in users%}
+                    {%if user['user_role'] != 'admin' %}
                     <tr>
-                        <td>1</td>
-                        <td>IJAAS</td>
-                        <td>IAAS</td>
-                        <td>111</td>
+                        <td>{{user['_id']}}</td>
+                        <td>{{user['name']}}</td>
+                        <td>{{user['email']}}</td>
+                        <td>{{user['user_role']|capitalize}}</td>
                         <td class="td-action">
-                            <button type="button" class="btn-action action-edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <path
-                                        d="M8.75234 21H19M11.7844 5.31171C11.7844 5.31171 11.7844 6.94634 13.419 8.58096C15.0537 10.2156 16.6883 10.2156 16.6883 10.2156M5.31963 17.9881L8.75234 17.4977C9.2475 17.4269 9.70636 17.1975 10.06 16.8438L18.3229 8.58096C19.2257 7.67818 19.2257 6.21449 18.3229 5.31171L16.6883 3.67708C15.7855 2.77431 14.3218 2.77431 13.419 3.67708L5.15616 11.94C4.80248 12.2936 4.57305 12.7525 4.50231 13.2477L4.01193 16.6804C3.90295 17.4432 4.5568 18.097 5.31963 17.9881Z"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
-                            </button>
+                            <div class="modal-edit">
+                                <button type="button" class="btn-action action-edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M8.75234 21H19M11.7844 5.31171C11.7844 5.31171 11.7844 6.94634 13.419 8.58096C15.0537 10.2156 16.6883 10.2156 16.6883 10.2156M5.31963 17.9881L8.75234 17.4977C9.2475 17.4269 9.70636 17.1975 10.06 16.8438L18.3229 8.58096C19.2257 7.67818 19.2257 6.21449 18.3229 5.31171L16.6883 3.67708C15.7855 2.77431 14.3218 2.77431 13.419 3.67708L5.15616 11.94C4.80248 12.2936 4.57305 12.7525 4.50231 13.2477L4.01193 16.6804C3.90295 17.4432 4.5568 18.097 5.31963 17.9881Z"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                    </svg>
+                                </button>
+                                <div class="modal">
+                                    <div class="modal-wrapper">
+                                        <div class="modal-header">
+                                            <div id="modal-title">Edit User</div>
+                                            <button type="button" class="btn-action action-edit close-modal">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-x" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M18 6l-12 12" />
+                                                    <path d="M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <form method="post" class="modal-body" action="{{ url_for('user.edit_user') }}">
+                                            <input type="hidden" id="user-{{user['_id']}}" name="edit_id"
+                                                class="input-field" value="{{user['_id']}}" />
+                                            <div class="field-wrapper">
+                                                <label for="name">Name</label>
+                                                <input type="text" id="name-{{user['_id']}}" name="name"
+                                                    class="input-field" value="{{user['name']}}" />
+                                                <span class="error-message" id="name-error-message"></span>
+                                            </div>
+                                            <div class="field-wrapper">
+                                                <label for="email">Email</label>
+                                                <input type="email" id="email-{{user['_id']}}" name="email"
+                                                    class="input-field" value="{{user['email']}}" />
+                                                <span class="error-message" id="email-error-message"></span>
+                                            </div>
 
-                            <button type="button" class="btn-action action-delete">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <path
-                                        d="M19 9L18.2841 18.3068C18.1238 20.3908 16.386 22 14.2959 22H9.70412C7.61398 22 5.87621 20.3908 5.71591 18.3068L5 9M21 7C18.4021 5.73398 15.3137 5 12 5C8.68635 5 5.59792 5.73398 3 7M10 5V4C10 2.89543 10.8954 2 12 2C13.1046 2 14 2.89543 14 4V5M10 11V17M14 11V17"
-                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
-                            </button>
+                                            <div class="field-wrapper">
+                                                <label for="title">Role</label>
+                                                <select name="role" id="role-{{ user['_id'] }}" class="input-field">
+                                                    <option value="jm" {% if user['user_role']=='jm' %}selected{% endif
+                                                        %}>Journal Manager
+                                                    </option>
+                                                    <option value="reader" {% if user['user_role']=='reader'
+                                                        %}selected{% endif %}>Reader
+                                                    </option>
+                                                    <option value="author" {% if user['user_role']=='author'
+                                                        %}selected{% endif %}>Author
+                                                    </option>
+                                                </select>
+                                                <span class="error-message" id="role-error-message"></span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn-add" role="link"
+                                                    aria-label="Add New User">Save
+                                                </button>
+                                            </div>
+                                        </form>
 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form method="post" action="{{ url_for('user.delete_user') }}">
+                                <input type="hidden" id="{{user['_id']}}" name="delete_id" value="{{user['_id']}}">
+                                <button type="submit" class="btn-action action-delete" aria-label="Delete Journal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M19 9L18.2841 18.3068C18.1238 20.3908 16.386 22 14.2959 22H9.70412C7.61398 22 5.87621 20.3908 5.71591 18.3068L5 9M21 7C18.4021 5.73398 15.3137 5 12 5C8.68635 5 5.59792 5.73398 3 7M10 5V4C10 2.89543 10.8954 2 12 2C13.1046 2 14 2.89543 14 4V5M10 11V17M14 11V17"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                    </svg>
+                                </button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>IJAAS</td>
-                        <td>IAAS</td>
-                        <td>111</td>
-                        <td>Edit</td>
-                    </tr>
+                    {%endif%}
+                    {%endfor%}
+
+
                 </tbody>
             </table>
         </div>
     </div>
 </section>
+<script src="{{ url_for('static', filename='javascripts/validation/validation.js') }}"></script>
+<script src="{{ url_for('static', filename='javascripts/validation/password.js') }}"></script>
+
+<script>
+    const modalUser = document.getElementById("modal");
+    const modalClose = document.getElementById("close-modal");
+    const modalOpen = document.getElementById("open-modal");
+
+    modalClose.addEventListener("click", () => {
+        modalUser.style.display = "none";
+    });
+
+    modalOpen.addEventListener("click", () => {
+        modalUser.style.display = "flex";
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modals = document.querySelectorAll(".modal-edit");
+
+        modals.forEach(modal => {
+            modal.querySelector('.action-edit').addEventListener("click", () => {
+                modal.querySelector('.modal').style.display = 'flex';
+            });
+
+            modal.querySelector('.close-modal').addEventListener("click", () => {
+                modal.querySelector('.modal').style.display = 'none';
+            });
+        });
+    });
+
+</script>
+
 {% endblock %}

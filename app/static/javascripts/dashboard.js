@@ -135,11 +135,18 @@ if (fileUpload) {
           return response.json();
         })
         .then((data) => {
+          const fileUrl = data.file_url;
+
           const fileName = data.filename;
           const name = document.getElementById("fileName");
+          const fileView = document.getElementById("file_view");
 
           if (name) {
             name.textContent = fileName;
+          }
+
+          if (fileView) {
+            fileView.value = fileUrl;
           }
         })
         .catch((error) => {

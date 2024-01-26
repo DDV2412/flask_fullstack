@@ -1,0 +1,216 @@
+{% extends 'frontend/layout/main-layout.html' %}
+{% block html %}
+<html data-wf-page="65a0efe3e89fd57e8e6546b6" data-wf-site="659ac690a512d75c923b3d93" lang="en">
+{% endblock %}
+{% block header %}
+{% block meta_title %} {{article['title']}} {% endblock %}
+{% block meta_description %}{{article['description']}}
+education, and health. {% endblock %}
+{% block og_title %}{{article['title']}} {% endblock %}
+{% block og_description %}{{article['description']}} {% endblock %}
+{% block twitter_title %}Ho{{article['title']}}me {% endblock %}
+{% block twitter_description %}{{article['description']}}{% endblock %}
+
+
+{% endblock %}
+
+{% block content %}
+
+<section class="section_hero-article">
+    <div class="container-large">
+        <div class="padding-section-small">
+            <div class="hero_article-wrapper">
+                <div class="hero_article-detail">
+                    <div class="max-width-large">
+                        <div class="margin-bottom margin-small">
+                            <h1 data-w-id="1eea9316-fbd4-f44c-d925-6e70a1d5ad53"
+                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                class="heading-style-h1 text-color-white">{{article['title']}}
+                            </h1>
+                        </div>
+                        <div class="article_author-wrapper w-dyn-list">
+                            <div data-w-id="407f7bdc-cbae-6477-d51e-13d0a851baa5"
+                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                role="list" class="article_author-list w-dyn-items">
+                                {% set creators = article['creators'] %}
+                                {% for index in range(creators|length) %}
+                                <div role="listitem" class="article_author-content w-dyn-item">
+                                    <div class="orcid_icon-wrapper"><img
+                                            src="{{url_for('static', filename='images/orcid.webp')}}" loading="lazy"
+                                            alt="ORCID Icon" class="orcid-icon"></div>
+                                    <div>{{ creators[index]['name']}}</div>
+                                </div>
+                                {% if index < (creators|length - 1) %}<span class="text-color-white">, </span>
+                                    {% endif %}
+                                    {% endfor %}
+                            </div>
+                        </div>
+                        <h2 data-w-id="1eea9316-fbd4-f44c-d925-6e70a1d5ad55"
+                            style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="text-size-medium text-weight-regular text-color-secondary_100">
+                            {{article['journal']['title']}}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section_article-detail">
+    <div class="container-large">
+        <div data-w-id="1eea9316-fbd4-f44c-d925-6e70a1d5ad5a"
+            style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+            class="article_image-wrapper shadow-small">
+            <img loading="lazy"
+                src="{% if not article['main_image'] %}{{ url_for('static', filename='images/default_thumbnail.png') }}{% else %}{{ article['main_image'] }}{% endif %}"
+                alt="{{article['title']}}" class="article_main-image">
+        </div>
+        <div class="padding-section-small">
+            <div class="article_detail-wrapper">
+                <div id="w-node-f7d5cc25-8e0c-e75f-0b7d-0724479d8aac-8e6546b6" class="article_sidebar-sticky">
+                    <div data-w-id="0782c1dc-7e9b-7395-490d-88094228d2db" style="opacity: 0;"
+                        class="article_toc-wrapper">
+                        <a href="#abstract" aria-label="Article Abstract">
+                            <h4 class="text-color-secondary_900 text-weight-semibold">
+                                Abstract
+                            </h4>
+                        </a>
+                        <h4 class="text-color-secondary_900 text-weight-semibold">Introduction</h4>
+                        <h4 class="text-color-secondary_900 text-weight-semibold">Method</h4>
+                        <h4 class="text-color-secondary_900 text-weight-semibold">Result</h4>
+                        <h4 class="text-color-secondary_900 text-weight-semibold">Conclusion</h4>
+                    </div>
+                </div>
+                <div id="w-node-_6e45bf30-1aff-8a7c-125d-1d527cf3f80b-8e6546b6"
+                    data-w-id="6e45bf30-1aff-8a7c-125d-1d527cf3f80b" style="opacity: 0;" class="article-details">
+                    <h3 id="abstract" class="text-size-large text-weight-semibold text-color-secondary_900">Abstract
+                    </h3>
+                    <p>{{article['description']}}</p>
+                    <div class="rich_text-blog w-richtext">
+                        <h2>Aperiam dolorum nostrum ducimus dolores est.</h2>
+                        <p>Et rem modi laboriosam sit nam tempore. Velit dolorem saepe culpa. Hic velit qui repellat
+                            illo alias. Maxime consequatur et et dolore provident nulla sed. Tempora fuga reiciendis
+                            consequatur esse. Enim nesciunt dolor qui magni.</p>
+                        <h3>Quam minus esse ipsam rerum quis sequi adipisci officia impedit.</h3>
+                        <blockquote>Doloribus quo earum perspiciatis dolores ea sunt aspernatur nulla. Id quo
+                            consequuntur totam odio. Enim qui non consequuntur quia accusantium assumenda amet minus
+                            officiis.</blockquote>
+                        <p>Quam animi perferendis quibusdam libero dolores. Rerum quaerat et occaecati dicta. Et
+                            quia non odit quis ut ipsum esse et non. Id assumenda cupiditate. Placeat assumenda
+                            occaecati. Dolores deleniti vel rem rerum rerum dicta.</p>
+                        <p>Ut molestias impedit eos rem doloremque est ullam quam. Ipsum id accusamus vitae.
+                            Accusamus ad modi cum aut eum hic ut doloribus facere. Voluptatum dolorem qui placeat
+                            quam sint. Officiis voluptatum error explicabo et doloremque quisquam omnis distinctio
+                            cum. Dignissimos consequuntur accusamus aut commodi aut modi iusto.</p>
+                        <h2>Eveniet quidem facere aliquid.</h2>
+                        <p>Dolor eius nisi quam ducimus molestias ut quia. Sint ut sequi. Omnis quod et in
+                            voluptatem consequuntur velit.</p>
+                        <h3>Quia animi animi rerum sint dicta sed esse.</h3>
+                        <blockquote>Quis dolorem tempore porro. Magnam rerum voluptatem neque. Consequatur rerum
+                            dolor est. Atque quia dolores. Alias voluptas veniam nihil repellat impedit aut aut.
+                        </blockquote>
+                        <p>Dolores quidem dicta quod dolor voluptas. Iusto rem vero ex non dolores mollitia
+                            molestiae ea. Impedit dolor sequi maxime earum nihil repellendus. Incidunt quia
+                            cupiditate ex illo. Ullam ratione et laborum beatae nobis fugit. Beatae animi aut
+                            tenetur.</p>
+                        <p>Maxime deserunt eum enim sint delectus rerum ratione optio. Quia aliquid itaque. Velit
+                            voluptas optio molestiae animi totam. Amet debitis et aut corrupti autem aut sed ut
+                            deleniti. Illum voluptatibus eaque officia iste molestiae omnis accusantium nam.</p>
+                        <h2>Rerum sed molestiae quas dicta sint incidunt itaque id sed.</h2>
+                        <p>Qui dolorum dolorum sunt laboriosam distinctio adipisci hic. Quidem qui nihil nostrum
+                            debitis praesentium ad. Quibusdam vitae reiciendis unde. Consectetur aspernatur iusto
+                            ullam veritatis nobis beatae laboriosam. Veniam qui non similique ipsum non assumenda
+                            sint cumque explicabo. Tempora error qui reiciendis et dicta.</p>
+                        <h3>Et incidunt molestiae nulla dolorum.</h3>
+                        <blockquote>Maxime impedit itaque. Labore numquam accusamus in voluptas. Omnis reprehenderit
+                            explicabo qui cupiditate aut. Hic alias odio fuga eveniet dolore sed praesentium
+                            inventore.</blockquote>
+                        <p>Qui fugiat qui</p>
+                        <p>L</p>
+                    </div>
+                </div>
+                <div id="w-node-d2951161-96d8-fc96-b6dd-8c99fdfac310-8e6546b6" class="article_sidebar-sticky">
+                    <div class="article_sidebar-wrapper">
+                        <div data-w-id="c1b0c1ed-ef34-e49e-720d-a764c4845839" style="opacity: 0;"
+                            class="article_sidebar">
+                            <h4 class="text-color-secondary_900 text-weight-semibold">Cite</h4>
+                            <div data-current="Tab 3" data-easing="ease" data-duration-in="300" data-duration-out="100"
+                                class="cite_tabs-wrapper w-tabs">
+                                <div class="cite_menu-list w-tab-menu" role="tablist"><a data-w-tab="Tab 1"
+                                        class="cite-link w-inline-block w-tab-link" tabindex="-1"
+                                        id="w-tabs-0-data-w-tab-0" href="#w-tabs-0-data-w-pane-0" role="tab"
+                                        aria-controls="w-tabs-0-data-w-pane-0" aria-selected="false">
+                                        <div>Plan</div>
+                                    </a><a data-w-tab="Tab 2" class="cite-link w-inline-block w-tab-link" tabindex="-1"
+                                        id="w-tabs-0-data-w-tab-1" href="#w-tabs-0-data-w-pane-1" role="tab"
+                                        aria-controls="w-tabs-0-data-w-pane-1" aria-selected="false">
+                                        <div>Bib</div>
+                                    </a><a data-w-tab="Tab 3" class="cite-link w-inline-block w-tab-link w--current"
+                                        id="w-tabs-0-data-w-tab-2" href="#w-tabs-0-data-w-pane-2" role="tab"
+                                        aria-controls="w-tabs-0-data-w-pane-2" aria-selected="true">
+                                        <div>RIS</div>
+                                    </a></div>
+                                <div class="cite_content-wrapper w-tab-content">
+                                    <div data-w-tab="Tab 1" class="cite-content w-tab-pane" id="w-tabs-0-data-w-pane-0"
+                                        role="tabpanel" aria-labelledby="w-tabs-0-data-w-tab-0">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                            varius enim in eros elementum tristique.</p>
+                                    </div>
+                                    <div data-w-tab="Tab 2" class="cite-content w-tab-pane" id="w-tabs-0-data-w-pane-1"
+                                        role="tabpanel" aria-labelledby="w-tabs-0-data-w-tab-1">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                            varius enim in eros elementum tristique.</p>
+                                    </div>
+                                    <div data-w-tab="Tab 3" class="cite-content w-tab-pane w--tab-active"
+                                        id="w-tabs-0-data-w-pane-2" role="tabpanel"
+                                        aria-labelledby="w-tabs-0-data-w-tab-2">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                            varius enim in eros elementum tristique.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><a data-w-id="4ca7f067-2539-c7ce-65be-544c80bbe68f" style="opacity: 0;" href="#"
+                            class="button-primary w-inline-block"><img
+                                src="https://assets-global.website-files.com/659ac690a512d75c923b3d93/65a10391c41387329d28ff1d_Paper.webp"
+                                loading="lazy" width="96" height="96" alt="Paper Icon" class="icon-button">
+                            <div>Full View</div>
+                        </a>
+                        <div data-w-id="2feefd7a-f369-1247-9b97-4c47a87b8035" style="opacity: 0;"
+                            class="article_sidebar">
+                            <h4 class="text-color-secondary_900 text-weight-semibold">DOI</h4>
+                            <a href="{{article['doi']}}">
+                                <div class="text-size-regular text-color-secondary_900">{{article['doi']}}</div>
+                            </a>
+                        </div>
+                        <div data-w-id="c48e53ad-a212-bbe2-0404-e7da39682f6e" style="opacity: 0;"
+                            class="article_sidebar">
+                            <h4 class="text-color-secondary_900 text-weight-semibold">ISSN Information</h4>
+                            <div>{{article['journal']['issn']}}</div>
+                        </div>
+                        <div data-w-id="15fba98f-4536-efb9-a058-95c56d3dce3d" style="opacity: 0;"
+                            class="article_sidebar">
+                            <h4 class="text-color-secondary_900 text-weight-semibold">Pages</h4>
+                            <div>{{article['pages']}}</div>
+                        </div>
+                        <div data-w-id="15fba98f-4536-efb9-a058-95c56d3dce3d" style="opacity: 0;"
+                            class="article_sidebar">
+                            <h4 class="text-color-secondary_900 text-weight-semibold">More Information</h4>
+                            {% if article['volume'] is not none and article['volume']|length > 0 %}
+
+                            <div>Volume {{ article['volume'] }}</div>
+
+                            {% endif %}
+
+                            {% if article['issue'] is not none and article['issue']|length > 0 %}
+                            <div>Issue {{ article['issue'] }}</div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%include 'frontend/components/cta.html'%}
+{% endblock %}

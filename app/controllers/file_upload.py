@@ -2,6 +2,8 @@ from urllib.parse import quote
 from flask import Blueprint, jsonify, request, send_file
 import os
 
+from app.utils.login_required import login_required
+
 class FileController:
     ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
 
@@ -11,6 +13,7 @@ class FileController:
         self.blueprint = Blueprint('file', __name__)
 
         @self.blueprint.route('/upload', methods=['POST'])
+        @login_required
         def upload_file():
             if 'file' not in request.files:
                 return jsonify({'error': 'No file part'}), 400
@@ -47,6 +50,7 @@ class FileController:
             return jsonify(preview_data)
 
         @self.blueprint.route('/upload/<filename>', methods=['GET'])
+        @login_required
         def get_image(filename):
             image_path = os.path.join(self.upload_folder, filename)
             if os.path.exists(image_path):

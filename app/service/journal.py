@@ -15,8 +15,8 @@ class JournalService:
         return self.journal_repository.find_by_id(journal_id)
     
     def update_journal(self, journal_id, updates):
-        self.journal_repository.update_journal(journal_id, updates)
+        return self.journal_repository.update_journal(journal_id, updates)
 
     def delete_journal(self, journal_id):
-        self.journal_repository.delete_journal(journal_id)
+        return self.journal_repository.delete_journal(journal_id)
 

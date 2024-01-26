@@ -1,0 +1,295 @@
+{% extends 'frontend/layout/main-layout.html' %}
+{% block html %}
+<html data-wf-page="659fa65e12695fa33d5029ba" data-wf-site="659ac690a512d75c923b3d93" lang="en">
+{% endblock %}
+{% block header %}
+{% block meta_title %}Home {% endblock %}
+{% block meta_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block og_title %}Home {% endblock %}
+{% block og_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block twitter_title %}Home {% endblock %}
+{% block twitter_description %}Access the latest knowledge in applied science, electrical engineering, computer science
+and information technology,
+education, and health. {% endblock %}
+{% block other_script%}
+<script src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-rangeslider@1/rangeslider.js"></script>
+{%endblock%}
+
+
+{% endblock %}
+
+{% block content %}
+<section class="section_hero-articles">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div class="hero_articles-wrapper">
+        <div class="hero_articles-detail">
+          <div class="max-width-medium">
+            <div class="margin-bottom margin-small">
+              <h1 data-w-id="c6008726-a807-f06d-0ad2-0b8153800e01" style="opacity:0"
+                class="heading-style-h1 text-color-white">Articles</h1>
+            </div>
+            <h2 data-w-id="b827f36e-4fce-1e68-3111-5217413cdb32" style="opacity:0"
+              class="text-size-medium text-weight-regular text-color-secondary_100">Access the latest knowledge in
+              applied science, electrical engineering, computer science and information technology, education, and
+              health.</h2>
+          </div>
+          <div class="max-width-medium">
+            <div data-w-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5b" style="opacity:0" class="form_search-block w-form">
+              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="search_home-form"
+                data-wf-page-id="659fa65e12695fa33d5029ba" data-wf-element-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5c">
+                <input class="search_input-field w-input" maxlength="256" name="Search" data-name="Search"
+                  placeholder="Search for articles ...." type="text" id="Search"><input type="submit" data-wait=""
+                  class="search_home-submit w-button" value="Search">
+              </form>
+
+            </div>
+            <div data-w-id="977685db-9e01-4f30-edde-010b18a8e541" style="opacity:0" class="button-group justify-end">
+              <div class="margin-top margin-small">
+                <a href="#" class="advanced-link">Advanced Search</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section_articles">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div class="aricles-wrapper">
+        <div id="w-node-_0d7d8f28-dab5-3061-4274-26bbd1539705-3d5029ba" class="article_filter-sticky">
+          <div id="w-node-f10399ce-fe8b-ca50-ebd6-eb41f2aa99f5-3d5029ba"
+            data-w-id="f10399ce-fe8b-ca50-ebd6-eb41f2aa99f5" style="opacity:0" class="article_filter-wrapper">
+            <div class="article_filter-form w-form">
+              <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="article-filter"
+                data-wf-page-id="659fa65e12695fa33d5029ba" data-wf-element-id="6b3d023c-f639-596b-3c3b-5d9f0c62a0fc">
+                <div class="article_search-wrapper">
+                  <div class="filter-title"><img src="{{url_for('static', filename='images/Filter.webp')}}"
+                      loading="lazy" alt="Filter Icon" class="filter-icon">
+                    <h3 class="text-size-medium text-weight-semibold text-color-secondary_900">Filters article</h3>
+                  </div><input class="field-input w-input" maxlength="256" name="Search" data-name="Search"
+                    placeholder="Search for articles ..." type="text" id="Search-2">
+                </div>
+                <div class="divide"></div>
+                <div class="filter_checkbox-wrapper">
+                  <div class="filter-title space-between">
+                    <h3 class="text-size-medium text-weight-semibold text-color-secondary_900">Years</h3><img
+                      src="{{url_for('static', filename='images/Arrow---Down-2.webp')}}" loading="lazy" alt="FAQ Arrow"
+                      class="filter-icon">
+                  </div>
+                  <div class="filter_checkbox-content">
+                    <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100"
+                      class="tabs-year w-tabs">
+                      <div class="tabs-menu w-tab-menu">
+                        <a data-w-tab="Tab 1" class="year_tabs-wrapper w-inline-block w-tab-link">
+                          <div>Single Year</div>
+                        </a>
+                        <a data-w-tab="Tab 2" class="year_tabs-wrapper w-inline-block w-tab-link w--current">
+                          <div>Range Year</div>
+                        </a>
+                      </div>
+                      <div class="tabs-content w-tab-content">
+                        <div data-w-tab="Tab 1" class="tabs-panel w-tab-pane">
+                          <div class="tabs_single-year">
+                            {% for year in articles['aggrs']['years']%}
+                            <label class="button_single-year w-radio">
+                              <div
+                                class="w-form-formradioinput w-form-formradioinput--inputType-custom single_year-radio w-radio-input">
+                              </div><input type="radio" data-name="{{year['_id']}}" id="{{year['_id']}}" name="year"
+                                style="opacity:0;position:absolute;z-index:-1" value="{{year['_id']}}"><span
+                                class="single_year-label w-form-label" for="year">{{year['_id']}}</span>
+                            </label>
+                            {%endfor%}
+                          </div>
+                        </div>
+                        <div data-w-tab="Tab 2" class="tabs-panel w-tab-pane w--tab-active">
+                          <div class="tabs_range-year">
+                            <div fs-rangeslider-step="1" fs-rangeslider-element="wrapper" fs-rangeslider-min="2000"
+                              fs-rangeslider-max="2024" class="fs-rangeslider_wrapper">
+                              <div fs-rangeslider-element="track" class="fs-rangeslider_track">
+                                <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
+                                <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
+                                <div fs-rangeslider-element="fill" class="fs-rangeslider_fill"></div>
+                              </div><input class="fs-rangeslider_input w-input" maxlength="256" name="From-3"
+                                fs-cmsfilter-field="price" data-name="From 3" fs-cmsfilter-range="from"
+                                placeholder="From" type="text" id="From-3"><input class="fs-rangeslider_input w-input"
+                                maxlength="256" name="To-3" fs-cmsfilter-field="price" data-name="To 3"
+                                fs-cmsfilter-range="to" placeholder="To" type="text" id="To-3">
+                              <div class="fs-range_values">
+                                <div><span fs-rangeslider-element="display-value">0</span></div>
+                                <div><span fs-rangeslider-element="display-value">0</span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="filter_checkbox-wrapper">
+                  <div class="filter-title space-between">
+                    <h3 class="text-size-medium text-weight-semibold text-color-secondary_900">Source Title</h3><img
+                      src="{{url_for('static', filename='images/Arrow---Down-2.webp')}}" loading="lazy" alt="FAQ Arrow"
+                      class="filter-icon">
+                  </div>
+                  <div class="filter_checkbox-content"><input class="field-input margin-bottom margin-small w-input"
+                      maxlength="256" name="Search-Publication-3" data-name="Search Publication 3"
+                      placeholder="Search for articles ..." type="text" id="Search-Publication-3">
+                    <div class=".radio-list ">
+                      {% for source_title in articles['aggrs']['journal']%}
+                      <label class="radio-filter w-radio">
+                        <div
+                          class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input">
+                        </div><input type="radio" data-name="source_title" id="{{source_title['_id']}}"
+                          name="source_title" style="opacity:0;position:absolute;z-index:-1"
+                          value="{{source_title['_id']}}"><span class="w-form-label"
+                          for="radio-6">{{source_title['_id']}}</span>
+                      </label>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+                <div class="filter_checkbox-wrapper">
+                  <div class="filter-title space-between">
+                    <h3 class="text-size-medium text-weight-semibold text-color-secondary_900">Authors</h3><img
+                      src="{{url_for('static', filename='images/Arrow---Down-2.webp')}}" loading="lazy" alt="FAQ Arrow"
+                      class="filter-icon">
+                  </div>
+                  <div class="filter_checkbox-content"><input class="field-input margin-bottom margin-small w-input"
+                      maxlength="256" name="Search-Publication-2" data-name="Search Publication 2"
+                      placeholder="Search for articles ..." type="text" id="Search-Publication-2">
+                    <div class="radio-list">
+                      {% for creator in articles['aggrs']['creators']%}
+                      <label class="radio-filter w-radio">
+                        <div
+                          class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input">
+                        </div><input type="radio" data-name="creators" id="{{creator['_id']}}['name']" name="creators"
+                          style="opacity:0;position:absolute;z-index:-1" value="{{creator['_id']['name']}}"><span
+                          class="w-form-label" for="radio-6">{{creator['_id']['name']}}</span>
+                      </label>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div id="w-node-beff68d9-3772-b82a-6a2d-e44cc60c4769-3d5029ba" class="article_content-wrapper">
+          <div data-w-id="827a58bd-2b6c-7a2a-f693-9ea0d0090b8f" style="opacity:0" class="article_sort-wrapper">
+            <h3 class="text-size-medium text-weight-semibold text-color-secondary_900">{{
+              articles['total']|format_number
+              }} Article Results</h3>
+
+            <div class="article_sort-form w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="sort-form"
+                data-wf-page-id="659fa65e12695fa33d5029ba" data-wf-element-id="94fd1043-7d2f-2ae1-1b30-fb4a030dc5e5">
+                <select id="field" name="field" data-name="Field" class="field-input is-select w-select">
+                  <option value="">Relevance</option>
+                  <option value="First">First choice</option>
+                  <option value="Second">Second choice</option>
+                  <option value="Third">Third choice</option>
+                </select>
+              </form>
+
+            </div>
+          </div>
+          <div class="article_collection-wrapper w-dyn-list">
+            <div role="list" class="article_list-wrapper w-dyn-items">
+              {%for article in articles['articles']%}
+              <div data-w-id="8eeda3f2-486a-e3f7-6aed-9c52d797a008" style="opacity:0" role="listitem"
+                class="article_collection-item w-dyn-item">
+                <a href="{{url_for('articles.article_detail', id=article['_id'])}}"
+                  class="article_item-wrapper w-inline-block">
+                  <div class="article_title-wrapper">
+                    <h3 class="text-size-large">{{article['title']}}</h3>
+                    <div class="text-size-small">{{article['doi']}}</div>
+                    <div class="">
+                      {% set creators = article['creators'] %}
+                      {% for index in range(creators|length) %}
+                      <span class="author_name">{{ creators[index]['name']}}</span>
+                      {% if index < (creators|length - 1) %} <span>, </span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                  </div>
+                  <div class="line-clamp-3">{{article['description']}}</div>
+                  <div class="article_detail-content">
+                    <div class="article_page-detail">
+                      <div class="article_page-wrapper">
+                        <div class="text-size-small">Volume: {{article['volume']}}</div>
+                      </div>
+                      <div class="article_page-wrapper">
+                        <div class="text-size-small">Issue: {{article['issue']}}</div>
+                      </div>
+                      <div class="article_page-wrapper">
+                        <div class="text-size-small">Page: {{article['pages']}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              {%endfor%}
+              {% if articles|length == 0 %}
+              <div class="w-dyn-empty">
+                <div>No items found.</div>
+              </div>
+              {%endif%}
+            </div>
+
+          </div>
+          <div class="pagination-wrapper">
+            <a href="{{ url_for('articles.articles', page=articles['current_page'] - 1) }}" aria-label="Pagination"
+              class="{{ 'is-disable' if articles['current_page'] <= 1 else 'is-active' }} button-pagination w-inline-block">
+              <div class="icon-button w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="16"
+                  viewbox="0 0 10 16" fill="none">
+                  <path
+                    d="M9.03033 0.469792C9.2966 0.736059 9.3208 1.15272 9.10295 1.44633L9.03033 1.53045L2.561 8.00012L9.03033 14.4698C9.2966 14.7361 9.3208 15.1527 9.10295 15.4463L9.03033 15.5305C8.76406 15.7967 8.3474 15.8209 8.05379 15.6031L7.96967 15.5305L0.96967 8.53045C0.703403 8.26418 0.679197 7.84752 0.897052 7.55391L0.96967 7.46979L7.96967 0.469792C8.26256 0.176899 8.73744 0.176899 9.03033 0.469792Z"
+                    fill="currentColor"></path>
+                </svg></div>
+            </a>
+            <div class="pagination_number-wrapper">
+              {% for i in range(1, 4) %}
+              <a href="{{ url_for('articles.articles', page=i) }}"
+                class="{{ 'is-active' if articles['current_page'] == i else '' }} button-pagination is-number w-inline-block">{{
+                i
+                }}</a>
+              {% endfor %}
+
+              {% if articles['total_pages'] > 5 %}
+              <div class="button-pagination is-number w-inline-block">...</div>
+              <a href="{{ url_for('articles.articles', page=articles['total_pages'] - 1) }}"
+                class="{{ 'is-active' if articles['current_page'] == articles['total_pages'] - 1 else '' }} button-pagination is-number w-inline-block">{{
+                articles['total_pages'] - 1 }}</a>
+              <a href="{{ url_for('articles.articles', page=articles['total_pages']) }}"
+                class="{{ 'is-active' if articles['current_page'] == articles['total_pages'] else '' }} button-pagination is-number w-inline-block">{{
+                articles['total_pages'] }}</a>
+              {% endif %}
+            </div>
+            <a aria-label="Pagination" href="{{ url_for('articles.articles', page=articles['current_page'] + 1) }}"
+              class="{{ 'is-disable' if articles['current_page'] >= articles['total_pages'] else 'is-active' }} button-pagination  w-inline-block">
+              <div class="icon-button w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="16"
+                  viewbox="0 0 10 16" fill="none">
+                  <path
+                    d="M0.96967 15.5305C0.703403 15.2642 0.679197 14.8475 0.897052 14.5539L0.96967 14.4698L7.439 8.00012L0.96967 1.53045C0.703403 1.26418 0.679197 0.847522 0.897052 0.55391L0.96967 0.469792C1.23594 0.203526 1.6526 0.179319 1.94621 0.397174L2.03033 0.469792L9.03033 7.46979C9.2966 7.73606 9.3208 8.15272 9.10295 8.44633L9.03033 8.53045L2.03033 15.5305C1.73744 15.8233 1.26256 15.8233 0.96967 15.5305Z"
+                    fill="currentColor"></path>
+                </svg></div>
+            </a>
+          </div>
+          <div class="pagination_info-wrapper">
+            <div class="text-size-small">Show {{ articles['current_page'] }} of {{ articles['total_pages'] }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%include 'frontend/components/cta.html'%}
+{% endblock %}
