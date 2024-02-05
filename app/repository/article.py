@@ -10,6 +10,17 @@ class ArticleRepository:
         self.db = db
         self.article_collection = self.db[Article.__name__]
 
+        self.article_collection.create_index(
+            [
+                ("title", pymongo.TEXT),
+                ("description", pymongo.TEXT),
+                ("content", pymongo.TEXT),
+                ("creators", pymongo.TEXT),
+                ("subjects", pymongo.TEXT),
+                ("publisher", pymongo.TEXT),
+            ]
+        )
+
     def create_article(self, article):
         result = self.article_collection.insert_one(article)
         return result.inserted_id
@@ -21,7 +32,6 @@ class ArticleRepository:
         search=None,
         sort_field=None,
         sort_order=None,
-        subject_filter=None,
         journal_filter=None,
         author_filter=None,
         singleYear=None,
@@ -39,15 +49,8 @@ class ArticleRepository:
         if search:
             regex_search = re.compile(fr'\b{re.escape(search)}\b', re.IGNORECASE)
             search_criteria = {
-                "$or": [
-                    {"title": {"$regex": regex_search}},  
-                    {"$text": {"$search": f'"{search}"'}}
-                ]
+                "title": {"$regex": regex_search}
             }
-
-            sort_criteria = [
-                {"$sort": {"title": {"$regex": regex_search, "$options": 'i'}}},
-            ]
 
 
         if featured is not None:
@@ -68,90 +71,94 @@ class ArticleRepository:
                 field = field.strip()
                 value = value.strip()
 
+
+                if not query_operator:
+                    query_operator = operator
+
                 query = {}
+
+                regex_value = re.compile(fr'\b{re.escape(value)}\b', re.IGNORECASE)
 
                 if operator != "NOT":
                     if field == "All Metadata":
                         query["$" + operator.lower()] = [
-                            {"title": {"$regex": value}},
-                            {"description": {"$regex": value}},
-                            {"subjects": {"$elemMatch": {"$regex": value}}},
+                            {"title": {"$regex": regex_value}},
+                            {"description": {"$regex": regex_value}},
+                            {"subjects": {"$elemMatch": {"$regex": regex_value}}},
                         ]
                     elif field == "Full Text":
                         query["$" + operator.lower()] = [{"$text": {"$search": value}}]
                     elif field == "Document Title":
-                        query["$" + operator.lower()] = [{"title": {"$regex": value}}]
-                    elif field == "Publication Title":
+                        query["$" + operator.lower()] = [{"title": {"$regex": regex_value}}]
+                    elif field == "Source Title":
                         query["$" + operator.lower()] = [
-                            {"journal.title": {"$regex": value}},
-                            {"journal.abbreviation": {"$regex": value}},
+                            {"journal.title": {"$regex": regex_value}},
+                            {"journal.abbreviation": {"$regex": regex_value}},
                         ]
                     elif field == "Authors":
                         query["$" + operator.lower()] = [
-                            {"creators": {"$elemMatch": {"$regex": value}}}
+                            {"creators": {"$elemMatch": {'name': {"$regex": regex_value}}}}
                         ]
                     elif field == "Abstract":
                         query["$" + operator.lower()] = [
-                            {"description": {"$regex": value}}
+                            {"description": {"$regex": regex_value}}
                         ]
                     elif field == "DOI":
-                        query["$" + operator.lower()] = [{"doi": {"$regex": value}}]
+                        query["$" + operator.lower()] = [{"doi": {"$regex": regex_value}}]
                     elif field == "Issue":
-                        query["$" + operator.lower()] = [{"issue": {"$regex": value}}]
+                        query["$" + operator.lower()] = [{"issue": {"$regex": regex_value}}]
                     elif field == "Article Page Number":
-                        query["$" + operator.lower()] = [{"pages": {"$regex": value}}]
+                        query["$" + operator.lower()] = [{"pages": {"$regex": regex_value}}]
                     elif field == "Keywords":
                         query["$" + operator.lower()] = [
-                            {"subjects": {"$elemMatch": {"$regex": value}}}
+                            {"subjects": {"$elemMatch": {"$regex": regex_value}}}
                         ]
                 else:
                     if field == "All Metadata":
                         query["$nor"] = [
-                            {"title": {"$regex": value}},
-                            {"description": {"$regex": value}},
+                            {"title": {"$regex": regex_value}},
+                            {"description": {"$regex": regex_value}},
                         ]
                     elif field == "Full Text":
                         query["$nor"] = [
-                            {"$text": {"$search": value}},
+                            {"$text": {"$search": regex_value}},
                         ]
                     elif field == "Document Title":
                         query["$nor"] = [
-                            {"title": {"$regex": value}},
+                            {"title": {"$regex": regex_value}},
                         ]
-                    elif field == "Publication Title":
+                    elif field == "Source Title":
                         query["$nor"] = [
-                            {"journal.title": {"$regex": value}},
-                            {"journal.abbreviation": {"$regex": value}},
+                            {"journal.title": {"$regex": regex_value}},
+                            {"journal.abbreviation": {"$regex": regex_value}},
                         ]
                     elif field == "Authors":
                         query["$nor"] = [
-                            {"creators": {"$elemMatch": {"$regex": value}}},
+                            {"creators": {"$elemMatch": {'name': {"$regex": regex_value}}}},
                         ]
                     elif field == "Abstract":
                         query["$nor"] = [
-                            {"description": {"$regex": value}},
+                            {"description": {"$regex": regex_value}},
                         ]
                     elif field == "DOI":
                         query["$nor"] = [
-                            {"doi": {"$regex": value}},
+                            {"doi": {"$regex": regex_value}},
                         ]
                     elif field == "Issue":
                         query["$nor"] = [
-                            {"issue": {"$regex": value}},
+                            {"issue": {"$regex": regex_value}},
                         ]
                     elif field == "Article Page Number":
                         query["$nor"] = [
-                            {"pages": {"$regex": value}},
+                            {"pages": {"$regex": regex_value}},
                         ]
                     elif field == "Keywords":
                         query["$nor"] = [
-                            {"subjects": {"$elemMatch": {"$regex": value}}},
+                            {"subjects": {"$elemMatch": {"$regex": regex_value}}},
                         ]
 
                 search_criteria["$and"].append(query)
 
-                if query_operator:
-                    operator = query_operator
 
         
         if sort_field and sort_order:
@@ -174,11 +181,6 @@ class ArticleRepository:
         if search_criteria:
             query.update(search_criteria)
 
-        if subject_filter:
-            if not isinstance(subject_filter, list):
-                subject_filter = [subject_filter]
-            query["subjects"] = {"$in": subject_filter}
-
         if journal_filter:
             if not isinstance(journal_filter, list):
                 journal_filter = [journal_filter]
@@ -187,7 +189,8 @@ class ArticleRepository:
         if author_filter:
             if not isinstance(author_filter, list):
                 author_filter = [author_filter]
-            query["creators"] = {"$in": author_filter}
+            query["creators"] = {"$elemMatch": {"name": {"$in": author_filter}}}
+
 
         if singleYear:
             query["publish_year"] = singleYear
@@ -200,19 +203,26 @@ class ArticleRepository:
             query["publish_year"] = year_filter
 
         if searchWithin:
+            escaped_searchWithin = re.escape(searchWithin)
             search_within_criteria = {
                 "$or": [
-                    {"title": {"$regex": fr'\b{re.escape(searchWithin)}\b', "$options": "i"}},
-                    {"description": {"$regex": fr'\b{re.escape(searchWithin)}\b', "$options": "i"}},
+                    {"title": {"$regex": fr'\b{escaped_searchWithin}\b', "$options": "i"}},
+                    {"description": {"$regex": fr'\b{escaped_searchWithin}\b', "$options": "i"}},
+                    {"creators.name": {"$regex": fr'\b{escaped_searchWithin}\b', "$options": "i"}},
                 ]
             }
 
-            search_criteria["$and"] = [
-                search_criteria.get("$text"),
-                search_criteria.get("$and"),
-                search_within_criteria,
-            ]
-        
+            if "$and" not in search_criteria:
+                search_criteria["$and"] = []
+
+            if "$text" in search_criteria:
+                search_criteria["$and"].append({"$text": search_criteria["$text"]})
+
+            if "$and" in search_criteria:
+                search_criteria["$and"].extend(search_criteria.get("$and", []))
+
+            search_criteria["$and"].append(search_within_criteria)
+
         pipeline = [
             {"$match": query}, 
             {"$facet": {

@@ -5,6 +5,7 @@ from app.controllers.auth import Auth
 from app.controllers.dashboard import Dashboard
 from app.controllers.file_upload import FileController
 from app.controllers.frontend.about import About
+from app.controllers.frontend.advanced import Advanced
 from app.controllers.frontend.articles import Articles
 from app.controllers.frontend.blog import Blog
 from app.controllers.frontend.conferences import Conferences
@@ -74,5 +75,8 @@ def init_router(app):
 
     publications_router = Publications(app)
     app.register_blueprint(publications_router.blueprint)
+
+    advanced_router = Advanced()
+    app.register_blueprint(advanced_router.blueprint)
 
     return app

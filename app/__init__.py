@@ -2,7 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-from flask import Flask, current_app
+from flask import Flask, current_app, render_template, request, url_for
 from pymongo import MongoClient
 
 from app.repository.article import ArticleRepository
@@ -25,6 +25,19 @@ def create_app():
     @app.template_filter()
     def format_number(value):
         return "{:,}".format(value)
+    
+    @app.context_processor
+    def utility_processor():
+        def update_query(page):
+            query_params = request.args.to_dict()
+            query_params['page'] = page
+            return url_for('articles.articles', **query_params)
+        return dict(update_query=update_query)
+
+    
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('frontend/404.html'), 404
 
     app.config['MONGODB_URI'] = os.getenv("MONGODB_URI")
 

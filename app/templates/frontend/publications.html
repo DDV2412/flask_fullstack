@@ -76,8 +76,7 @@ education, and health. {% endblock %}
                   </div>
                 </div>
               </div>
-              <a href="{{ url_for('publications.publication_detail', id=journal['_id']) }}"
-                class="button-primary w-inline-block">
+              <a href="{{ journal['site_url'] }}" target="_blank" class="button-primary w-inline-block">
                 <div>Read More</div>
               </a>
             </div>

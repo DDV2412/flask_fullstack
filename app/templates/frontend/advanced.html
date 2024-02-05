@@ -1,0 +1,285 @@
+{% extends 'frontend/layout/main-layout.html' %}
+{% block html %}
+<html data-wf-page="65be53a5b7940f23e5680046" data-wf-site="659ac690a512d75c923b3d93" lang="en">
+{% endblock %}
+{% block header %}
+{% block meta_title %}Home {% endblock %}
+{% block meta_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block og_title %}Home {% endblock %}
+{% block og_description %}Access the latest knowledge in applied science, electrical engineering, computer science and
+information technology,
+education, and health. {% endblock %}
+{% block twitter_title %}Home {% endblock %}
+{% block twitter_description %}Access the latest knowledge in applied science, electrical engineering, computer science
+and information technology,
+education, and health. {% endblock %}
+{% block other_script%}
+<script src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-rangeslider@1/rangeslider.js"></script>
+{%endblock%}
+
+
+{% endblock %}
+
+{% block content %}
+<section class="section_hero-about">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div class="hero_about-wrapper">
+        <div class="hero_about-detail">
+          <div class="max-width-medium">
+            <div class="margin-bottom margin-small">
+              <h1 data-w-id="c6008726-a807-f06d-0ad2-0b8153800e01" style="opacity:0"
+                class="heading-style-h1 text-color-white">Advanced Search</h1>
+            </div>
+            <h2 data-w-id="b827f36e-4fce-1e68-3111-5217413cdb32" style="opacity:0"
+              class="text-size-medium text-weight-regular text-color-secondary_100">Leverage the 'Advanced Search'
+              feature at IPMUGO Digital Library for targeted queries in applied science, electrical
+              engineering, computer science, information technology, education, and health. Access support, resources,
+              or explore
+              collaborations efficiently.</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section_contact">
+  <div class="container-large">
+    <div class="padding-section-small">
+      <div id="w-node-_73de18ca-1f27-b92c-56fa-84e5ac5bf4d0-e5680046" data-w-id="73de18ca-1f27-b92c-56fa-84e5ac5bf4d0"
+        style="opacity:0" class="contact_form-wrapper w-form">
+        <form id="advanced-form" name="advanced-form" data-name="Advanced Form" method="get" class="contact-form"
+          data-wf-page-id="65be53a5b7940f23e5680046" data-wf-element-id="73de18ca-1f27-b92c-56fa-84e5ac5bf4d1">
+          <div class="search_grid">
+            <div id="w-node-_68456402-7b9f-7f91-d6b7-44c612c1f362-e5680046" class="field-wrapper"><input
+                class="field-input w-input" maxlength="256" name="Search-Term" data-name="Search Term"
+                placeholder="Search Term" type="text" id="Search-Term"></div>
+            <div class="field-wrapper">
+              <select id="SearchTermSelect" name="SearchTermSelect" data-name="Field" class="field-input w-select">
+                <option value="All Metadata">All Metadata</option>
+                <option value="Full Text">Full Text</option>
+                <option value="Document Title">Document Title</option>
+                <option value="Authors">Authors</option>
+                <option value="Source Title">Source Title</option>
+                <option value="Abstract">Abstract</option>
+                <option value="DOI">DOI</option>
+                <option value="Issue">Issue</option>
+                <option value="Article Page Number">Article Page Number</option>
+                <option value="Keywords">Keywords</option>
+              </select>
+            </div>
+          </div>
+          <div class="advanced-container" id="advancedOptionsContainer">
+            <div class="search_grid advanced-option">
+              <div class="field-wrapper">
+                <select name="AdvancedOptionOperation" data-name="AdvancedOptionOperation"
+                  class="field-input w-select AdvancedOptionOperation">
+                  <option value="AND">AND</option>
+                  <option value="OR">OR</option>
+                  <option value="NOT">NOT</option>
+                </select>
+              </div>
+              <div id="w-node-_26feb82a-7260-0e08-92ae-a327e3583ef6-e5680046" class="field-wrapper">
+                <input class="field-input w-input AdvancedOptionTerm" maxlength="256" name="AdvancedOptionTerm"
+                  data-name="AdvancedOptionTerm" placeholder="Search Term" type="text">
+              </div>
+              <div class="field-wrapper add_more">
+                <select name="AdvancedOptionSelect" data-name="AdvancedOptionSelect"
+                  class="field-input w-select AdvancedOptionSelect">
+                  <option value="All Metadata">All Metadata</option>
+                  <option value="Full Text">Full Text</option>
+                  <option value="Document Title">Document Title</option>
+                  <option value="Authors">Authors</option>
+                  <option value="Source Title">Source Title</option>
+                  <option value="Abstract">Abstract</option>
+                  <option value="DOI">DOI</option>
+                  <option value="Issue">Issue</option>
+                  <option value="Article Page Number">Article Page Number</option>
+                  <option value="Keywords">Keywords</option>
+                </select>
+                <div class="button-secondary is-icon removeOptionBtn"><img
+                    src="{{url_for('static', filename='/images/iconX.webp')}}" loading="lazy" alt=""
+                    class="icon-button">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group justify-end">
+            <div class="button-primary is-icon" id="addOptionBtn"><img
+                src="{{url_for('static', filename='/images/text-plus.webp')}}" loading="lazy" alt=""
+                class="icon-button">
+            </div>
+          </div>
+          <div class="search_grid">
+            <div class="field-wrapper"><label class="radio-filter w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input">
+                </div><input type="radio" data-name="year_range" id="year_range" name="year_range"
+                  style="opacity:0;position:absolute;z-index:-1" value="Radio"><span class="w-form-label"
+                  for="year_range">Specify Year Range</span>
+              </label>
+              <div style="display: none;" fs-rangeslider-step="1" id="rangeYear" fs-rangeslider-element="wrapper"
+                fs-rangeslider-min="2000" fs-rangeslider-max="2024" class="fs-rangeslider_wrapper">
+                <div fs-rangeslider-element="track" class="fs-rangeslider_track">
+                  <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
+                  <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
+                  <div fs-rangeslider-element="fill" class="fs-rangeslider_fill"></div>
+                </div>
+                <input class="fs-rangeslider_input w-input" maxlength="256" name="minYear" fs-cmsfilter-field="minYear"
+                  data-name="minYear" fs-cmsfilter-range="minYear" placeholder="minYear" type="text" id="minYear">
+                <input class="fs-rangeslider_input w-input" maxlength="256" name="maxYear" fs-cmsfilter-field="maxYear"
+                  data-name="maxYear" fs-cmsfilter-range="maxYear" placeholder="maxYear" type="text" id="maxYear">
+                <div class="fs-range_values">
+                  <div><span fs-rangeslider-element="display-value">0</span></div>
+                  <div><span fs-rangeslider-element="display-value">0</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-group justify-end">
+            <input type="submit" data-wait="Please wait..." class="button-primary w-button" value="Search">
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+{%include 'frontend/components/cta.html'%}
+
+<script>
+  document.addEventListener("DOMContentLoaded",
+    () => {
+      document.getElementById("year_range").addEventListener("change", (e) => {
+        if (e.isTrusted) {
+          document.getElementById("rangeYear").style.display = 'block'
+        }
+      });
+
+
+      const addOptionBtn = document.getElementById('addOptionBtn');
+      const advancedOptionsContainer = document.getElementById('advancedOptionsContainer');
+
+      function addAdvancedOption() {
+        const div = document.createElement('div');
+        div.className = "search_grid advanced-option"
+        div.innerHTML = `
+            <div class="field-wrapper">
+              <select  name="AdvancedOptionOperation" data-name="AdvancedOptionOperation"
+                class="field-input w-select AdvancedOptionOperation">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+                <option value="NOT">NOT</option>
+              </select>
+            </div>
+            <div id="w-node-_26feb82a-7260-0e08-92ae-a327e3583ef6-e5680046" class="field-wrapper">
+              <input class="field-input w-input AdvancedOptionTerm" maxlength="256" name="AdvancedOptionTerm"
+                data-name="AdvancedOptionTerm" placeholder="Search Term" type="text">
+            </div>
+            <div class="field-wrapper add_more">
+              <select name="AdvancedOptionSelect" data-name="AdvancedOptionSelect"
+                class="field-input w-select AdvancedOptionSelect">
+                <option value="All Metadata">All Metadata</option>
+                <option value="Full Text">Full Text</option>
+                <option value="Document Title">Document Title</option>
+                <option value="Authors">Authors</option>
+                <option value="Source Title">Source Title</option>
+                <option value="Abstract">Abstract</option>
+                <option value="DOI">DOI</option>
+                <option value="Issue">Issue</option>
+                <option value="Article Page Number">Article Page Number</option>
+                <option value="Keywords">Keywords</option>
+              </select>
+              <div class="button-secondary is-icon removeOptionBtn"><img
+                  src="{{url_for('static', filename='/images/iconX.webp')}}" loading="lazy" alt="" class="icon-button">
+              </div>
+            </div>
+        `;
+        advancedOptionsContainer.appendChild(div);
+
+        div.querySelector('.removeOptionBtn').addEventListener('click', function () {
+          let parent = this.closest('.search_grid');
+          if (parent) {
+            parent.remove();
+          }
+        });
+      }
+
+      addOptionBtn.addEventListener('click', addAdvancedOption);
+    })
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('advanced-form');
+
+    const baseURL = "{{ url_for('articles.articles') }}";
+
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const searchTerm = document.getElementById('Search-Term').value;
+      const searchTermSelect = document.getElementById('SearchTermSelect').value;
+
+      let searchString = "";
+
+      if (searchTermSelect && searchTerm) {
+        searchString += `("${searchTermSelect}":${searchTerm})`;
+      }
+
+      const advancedOptions = Array.from(document.querySelectorAll('.advanced-option')).map(option => {
+        const operation = option.querySelector('.AdvancedOptionOperation').value;
+        const term = option.querySelector('.AdvancedOptionTerm').value.trim();
+        const field = option.querySelector('.AdvancedOptionSelect').value;
+
+        return term ? { operation, term, field } : null;
+      }).filter(Boolean);;
+
+      const groupedOptions = advancedOptions.reduce((groups, option) => {
+        if (option.operation === "AND") {
+          groups.AND.push(`("${option.field}":${option.term})`);
+        } else if (option.operation === "OR") {
+          groups.OR.push(`("${option.field}":${option.term})`);
+        } else if (option.operation === "NOT") {
+          groups.NOT.push(`("${option.field}":${option.term})`);
+        }
+        return groups;
+      }, { AND: [], OR: [], NOT: [] });
+
+      if (groupedOptions.AND.length > 0) {
+        searchString += ` AND ${groupedOptions.AND.join(" AND ")}`;
+      }
+
+      if (groupedOptions.OR.length > 0) {
+        searchString += ` OR ${groupedOptions.OR.join(" OR ")}`;
+      }
+
+      if (groupedOptions.NOT.length > 0) {
+        searchString += ` NOT ${groupedOptions.NOT.join(" NOT ")}`;
+      }
+
+
+      const rangeYear = document.getElementById('year_range').checked;
+      const minYear = document.getElementById('minYear').value;
+      const maxYear = document.getElementById('maxYear').value;
+
+      let destinationURL = `${baseURL}?advancedQuery=${searchString}`;
+
+      if (rangeYear) {
+        destinationURL += `&minYear=${minYear}&maxYear=${maxYear}`;
+      }
+
+
+      window.location.href = destinationURL;
+    });
+  });
+</script>
+
+
+
+
+{% endblock %}

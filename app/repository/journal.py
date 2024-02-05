@@ -2,6 +2,7 @@
 
 import random
 from bson import ObjectId
+import pymongo
 
 from app.models import Journal
 
@@ -10,6 +11,15 @@ class JournalRepository:
     def __init__(self, db):
         self.db = db
         self.journal_collection = self.db[Journal.__name__]
+
+        self.journal_collection.create_index(
+            [
+                ("title", pymongo.TEXT),
+                ("short_summary", pymongo.TEXT),
+                ("content", pymongo.TEXT),
+                ("abbreviation", pymongo.TEXT),
+            ]
+        )
             
 
     def create_journal(self, journal):

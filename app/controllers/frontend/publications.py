@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, redirect, render_template, request, url_for
 
 class Publications:
     def __init__(self, app):
@@ -14,11 +14,9 @@ class Publications:
 
             return render_template('frontend/publications.html', journals=journals)
         
-        @self.blueprint.route('/publication/<id>', methods=['GET'])
-        def publication_detail(id):
-            journal = self.journal_service.find_by_id(id)
 
-            return render_template('frontend/publication_detail.html', journal=journal)
+        
+        
     
         
         

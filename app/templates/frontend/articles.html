@@ -40,7 +40,7 @@ education, and health. {% endblock %}
           </div>
           <div class="max-width-medium">
             <div data-w-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5b" style="opacity:0" class="form_search-block w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" method="get" class="search_home-form"
+              <form id="search-form" name="search-form" data-name="Search Form" method="post" class="search_home-form"
                 data-wf-page-id="659fa65e12695fa33d5029ba" data-wf-element-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5c">
                 <input class="search_input-field w-input" maxlength="256" name="Search" data-name="Search"
                   placeholder="Search for articles ...." type="text" id="Search"><input type="submit" data-wait=""
@@ -50,7 +50,7 @@ education, and health. {% endblock %}
             </div>
             <div data-w-id="977685db-9e01-4f30-edde-010b18a8e541" style="opacity:0" class="button-group justify-end">
               <div class="margin-top margin-small">
-                <a href="#" class="advanced-link">Advanced Search</a>
+                <a href="{{url_for('advanced.advanced')}}" class="advanced-link">Advanced Search</a>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ education, and health. {% endblock %}
                       loading="lazy" alt="Filter Icon" class="filter-icon">
                     <h3 class="text-size-medium text-weight-semibold text-color-secondary_900">Filters article</h3>
                   </div><input class="field-input w-input" maxlength="256" name="Search" data-name="Search"
-                    placeholder="Search for articles ..." type="text" id="Search-2">
+                    placeholder="Search with article ..." type="text" id="Search-Article">
                 </div>
                 <div class="divide"></div>
                 <div class="filter_checkbox-wrapper">
@@ -87,28 +87,29 @@ education, and health. {% endblock %}
                     <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100"
                       class="tabs-year w-tabs">
                       <div class="tabs-menu w-tab-menu">
-                        <a data-w-tab="Tab 1" class="year_tabs-wrapper w-inline-block w-tab-link">
+                        <a data-w-tab="Tab 1" class="year_tabs-wrapper w-inline-block w-tab-link w--current">
                           <div>Single Year</div>
                         </a>
-                        <a data-w-tab="Tab 2" class="year_tabs-wrapper w-inline-block w-tab-link w--current">
+                        <a data-w-tab="Tab 2" class="year_tabs-wrapper w-inline-block w-tab-link ">
                           <div>Range Year</div>
                         </a>
                       </div>
                       <div class="tabs-content w-tab-content">
-                        <div data-w-tab="Tab 1" class="tabs-panel w-tab-pane">
+                        <div data-w-tab="Tab 1" class="tabs-panel w-tab-pane  w--tab-active">
                           <div class="tabs_single-year">
-                            {% for year in articles['aggrs']['years']%}
+                            {% for year in articles['aggrs']['years'] | sort(attribute='_id')%}
                             <label class="button_single-year w-radio">
                               <div
                                 class="w-form-formradioinput w-form-formradioinput--inputType-custom single_year-radio w-radio-input">
                               </div><input type="radio" data-name="{{year['_id']}}" id="{{year['_id']}}" name="year"
-                                style="opacity:0;position:absolute;z-index:-1" value="{{year['_id']}}"><span
-                                class="single_year-label w-form-label" for="year">{{year['_id']}}</span>
+                                style="opacity:0;position:absolute;z-index:-1" value="{{year['_id']}}"
+                                onchange="updateFilterWithYear(this.value)"><span class="single_year-label w-form-label"
+                                for="year">{{year['_id']}}</span>
                             </label>
                             {%endfor%}
                           </div>
                         </div>
-                        <div data-w-tab="Tab 2" class="tabs-panel w-tab-pane w--tab-active">
+                        <div data-w-tab="Tab 2" class="tabs-panel w-tab-pane">
                           <div class="tabs_range-year">
                             <div fs-rangeslider-step="1" fs-rangeslider-element="wrapper" fs-rangeslider-min="2000"
                               fs-rangeslider-max="2024" class="fs-rangeslider_wrapper">
@@ -117,9 +118,9 @@ education, and health. {% endblock %}
                                 <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
                                 <div fs-rangeslider-element="fill" class="fs-rangeslider_fill"></div>
                               </div><input class="fs-rangeslider_input w-input" maxlength="256" name="From-3"
-                                fs-cmsfilter-field="price" data-name="From 3" fs-cmsfilter-range="from"
+                                fs-cmsfilter-field="year" data-name="From 3" fs-cmsfilter-range="from"
                                 placeholder="From" type="text" id="From-3"><input class="fs-rangeslider_input w-input"
-                                maxlength="256" name="To-3" fs-cmsfilter-field="price" data-name="To 3"
+                                maxlength="256" name="To-3" fs-cmsfilter-field="year" data-name="To 3"
                                 fs-cmsfilter-range="to" placeholder="To" type="text" id="To-3">
                               <div class="fs-range_values">
                                 <div><span fs-rangeslider-element="display-value">0</span></div>
@@ -139,17 +140,17 @@ education, and health. {% endblock %}
                       class="filter-icon">
                   </div>
                   <div class="filter_checkbox-content"><input class="field-input margin-bottom margin-small w-input"
-                      maxlength="256" name="Search-Publication-3" data-name="Search Publication 3"
-                      placeholder="Search for articles ..." type="text" id="Search-Publication-3">
-                    <div class=".radio-list ">
+                      maxlength="256" name="Search-Publication" data-name="Search Publication"
+                      placeholder="Search for source title ..." type="text" id="search_source_title">
+                    <div class="radio-list" id="source_title">
                       {% for source_title in articles['aggrs']['journal']%}
                       <label class="radio-filter w-radio">
                         <div
                           class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input">
                         </div><input type="radio" data-name="source_title" id="{{source_title['_id']}}"
                           name="source_title" style="opacity:0;position:absolute;z-index:-1"
-                          value="{{source_title['_id']}}"><span class="w-form-label"
-                          for="radio-6">{{source_title['_id']}}</span>
+                          value="{{source_title['_id']}}" onchange="updateFilterWithSource(this.value)"><span
+                          class="w-form-label" for="radio-6">{{source_title['_id']}}</span>
                       </label>
                       {%endfor%}
                     </div>
@@ -162,16 +163,17 @@ education, and health. {% endblock %}
                       class="filter-icon">
                   </div>
                   <div class="filter_checkbox-content"><input class="field-input margin-bottom margin-small w-input"
-                      maxlength="256" name="Search-Publication-2" data-name="Search Publication 2"
-                      placeholder="Search for articles ..." type="text" id="Search-Publication-2">
-                    <div class="radio-list">
+                      maxlength="256" name="Search-Creator" data-name="Search Creator"
+                      placeholder="Search for author name ..." type="text" id="search_source_creator">
+                    <div class="radio-list" id="search_creator">
                       {% for creator in articles['aggrs']['creators']%}
                       <label class="radio-filter w-radio">
                         <div
                           class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input">
                         </div><input type="radio" data-name="creators" id="{{creator['_id']}}['name']" name="creators"
-                          style="opacity:0;position:absolute;z-index:-1" value="{{creator['_id']['name']}}"><span
-                          class="w-form-label" for="radio-6">{{creator['_id']['name']}}</span>
+                          style="opacity:0;position:absolute;z-index:-1" value="{{creator['_id']['name']}}"
+                          onchange="updateFilterWithCreator(this.value)"><span class="w-form-label"
+                          for="radio-6">{{creator['_id']['name']}}</span>
                       </label>
                       {%endfor%}
                     </div>
@@ -189,15 +191,17 @@ education, and health. {% endblock %}
               }} Article Results</h3>
 
             <div class="article_sort-form w-form">
-              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="sort-form"
-                data-wf-page-id="659fa65e12695fa33d5029ba" data-wf-element-id="94fd1043-7d2f-2ae1-1b30-fb4a030dc5e5">
-                <select id="field" name="field" data-name="Field" class="field-input is-select w-select">
-                  <option value="">Relevance</option>
-                  <option value="First">First choice</option>
-                  <option value="Second">Second choice</option>
-                  <option value="Third">Third choice</option>
-                </select>
-              </form>
+              <select id="sort-by" name="sort-by" data-name="Field" class="field-input is-select w-select">
+                <option value="relevance">Relevance</option>
+                <option value="publish_at" data-order="desc">Newest</option>
+                <option value="publish_at" data-order="asc">Oldest</option>
+              </select>
+              <select id="pagination" name="pagination" data-name="Field" class="field-input is-select w-select">
+                <option value="15">15</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <button class="button-secondary" style="flex: none;display: none;" id="resetFilter">Reset Filter</button>
 
             </div>
           </div>
@@ -232,6 +236,9 @@ education, and health. {% endblock %}
                       <div class="article_page-wrapper">
                         <div class="text-size-small">Page: {{article['pages']}}</div>
                       </div>
+                      <div class="article_page-wrapper">
+                        <div class="text-size-small">Publish at: {{article['publish_at']}}</div>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -246,7 +253,7 @@ education, and health. {% endblock %}
 
           </div>
           <div class="pagination-wrapper">
-            <a href="{{ url_for('articles.articles', page=articles['current_page'] - 1) }}" aria-label="Pagination"
+            <a href="{{ update_query(articles['current_page'] - 1) }}" aria-label="Pagination"
               class="{{ 'is-disable' if articles['current_page'] <= 1 else 'is-active' }} button-pagination w-inline-block">
               <div class="icon-button w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="16"
                   viewbox="0 0 10 16" fill="none">
@@ -256,24 +263,32 @@ education, and health. {% endblock %}
                 </svg></div>
             </a>
             <div class="pagination_number-wrapper">
-              {% for i in range(1, 4) %}
-              <a href="{{ url_for('articles.articles', page=i) }}"
-                class="{{ 'is-active' if articles['current_page'] == i else '' }} button-pagination is-number w-inline-block">{{
-                i
+              {% if articles['total_pages'] > 1 %}
+              {% if articles['total_pages'] <= 4 %} {% for i in range(1, articles['total_pages'] + 1) %} <a
+                href="{{ update_query(i) }}"
+                class="{{ 'is-active' if articles['current_page'] == i else '' }} button-pagination is-number w-inline-block">
+                {{ i
                 }}</a>
-              {% endfor %}
-
-              {% if articles['total_pages'] > 5 %}
-              <div class="button-pagination is-number w-inline-block">...</div>
-              <a href="{{ url_for('articles.articles', page=articles['total_pages'] - 1) }}"
-                class="{{ 'is-active' if articles['current_page'] == articles['total_pages'] - 1 else '' }} button-pagination is-number w-inline-block">{{
-                articles['total_pages'] - 1 }}</a>
-              <a href="{{ url_for('articles.articles', page=articles['total_pages']) }}"
-                class="{{ 'is-active' if articles['current_page'] == articles['total_pages'] else '' }} button-pagination is-number w-inline-block">{{
-                articles['total_pages'] }}</a>
-              {% endif %}
+                {% endfor %}
+                {% else %}
+                {% for i in range(1, 4) %}
+                <a href="{{ update_query(i) }}"
+                  class="{{ 'is-active' if articles['current_page'] == i else '' }} button-pagination is-number w-inline-block">{{
+                  i
+                  }}</a>
+                {% endfor %}
+                <div class="button-pagination is-number w-inline-block">...</div>
+                <a href="{{ update_query(articles['total_pages'] - 1) }}"
+                  class="{{ 'is-active' if articles['current_page'] == articles['total_pages'] - 1 else '' }} button-pagination is-number w-inline-block">{{
+                  articles['total_pages'] - 1 }}</a>
+                <a href="{{ update_query(articles['total_pages']) }}"
+                  class="{{ 'is-active' if articles['current_page'] == articles['total_pages'] else '' }} button-pagination is-number w-inline-block">{{
+                  articles['total_pages'] }}</a>
+                {% endif %}
+                {% endif %}
             </div>
-            <a aria-label="Pagination" href="{{ url_for('articles.articles', page=articles['current_page'] + 1) }}"
+
+            <a aria-label="Pagination" href="{{ update_query(articles['current_page'] + 1) }}"
               class="{{ 'is-disable' if articles['current_page'] >= articles['total_pages'] else 'is-active' }} button-pagination  w-inline-block">
               <div class="icon-button w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="16"
                   viewbox="0 0 10 16" fill="none">
@@ -292,4 +307,259 @@ education, and health. {% endblock %}
   </div>
 </section>
 {%include 'frontend/components/cta.html'%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const paginationSelect = document.getElementById('pagination');
+    const sortBySelect = document.getElementById('sort-by');
+
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    function updateURLParams(params, removeOtherParams = false) {
+      const url = new URL(window.location);
+      for (const paramName in params) {
+        if (params[paramName] !== '') {
+          url.searchParams.set(paramName, params[paramName]);
+        } else {
+          url.searchParams.delete(paramName);
+        }
+      }
+      if (removeOtherParams) {
+        url.searchParams.delete('sort_order');
+      }
+      window.location.href = url.toString();
+    }
+
+    if (paginationSelect) {
+      paginationSelect.addEventListener('change', function () {
+        updateURLParams({ 'per_page': this.value }, true);
+      });
+    }
+
+    if (sortBySelect) {
+      sortBySelect.addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const params = { 'sort_field': selectedOption.value };
+
+        if (selectedOption.value === 'publish_at') {
+          const sortOrder = selectedOption.getAttribute('data-order');
+          params['sort_order'] = sortOrder;
+        } else {
+          params['sort_order'] = '';
+        }
+
+        updateURLParams(params, selectedOption.value !== 'publish_at');
+      });
+    }
+
+
+
+    const setSelectOptionFromQueryParam = (selectElement, queryParam) => {
+      const value = getQueryParam(queryParam);
+      if (value && selectElement) {
+        for (const option of selectElement.options) {
+          const isSortOrderMatch = queryParam === 'sort_order' && option.getAttribute('data-order') === value;
+          if (option.value === value || isSortOrderMatch) {
+            option.selected = true;
+            break;
+          }
+        }
+      }
+    };
+
+    setSelectOptionFromQueryParam(paginationSelect, 'per_page');
+    setSelectOptionFromQueryParam(sortBySelect, 'sort_field');
+    setSelectOptionFromQueryParam(sortBySelect, 'sort_order');
+  });
+</script>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const form = document.getElementById('search-form');
+    const baseURL = "{{ url_for('articles.articles') }}";
+
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const searchValue = document.querySelector('[name="Search"]').value;
+
+      const destinationURL = `${baseURL}?search=${searchValue}`;
+
+
+      window.location.href = destinationURL;
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+
+
+    const searchValue = getQueryParam('search');
+
+    const searchWithValue = getQueryParam('searchWithin');
+
+    const creatorParam = getQueryParam('creator');
+
+    const sourceParam = getQueryParam('source_title');
+
+
+
+    if (creatorParam) {
+      const creatorRadios = document.querySelectorAll('input[name="creators"]');
+
+      creatorRadios.forEach(function (radio) {
+        if (radio.value === decodeURIComponent(creatorParam)) {
+          const customDiv = radio.previousElementSibling;
+          if (customDiv && customDiv.classList.contains('w-form-formradioinput')) {
+            customDiv.classList.add('w--redirected-checked');
+          }
+        }
+      });
+    }
+
+    if (sourceParam) {
+      const sourceRadios = document.querySelectorAll('input[name="source_title"]');
+
+      sourceRadios.forEach(function (radio) {
+        if (radio.value === decodeURIComponent(sourceParam)) {
+          const customDiv = radio.previousElementSibling;
+          if (customDiv && customDiv.classList.contains('w-form-formradioinput')) {
+            customDiv.classList.add('w--redirected-checked');
+          }
+        }
+      });
+    }
+
+    if (searchValue) {
+      const searchInput = document.getElementById('Search');
+      if (searchInput) {
+        searchInput.value = searchValue;
+      }
+
+    }
+
+    if (searchWithValue) {
+      const searchArticleInput = document.getElementById('Search-Article');
+      if (searchArticleInput) {
+        searchArticleInput.value = searchValue;
+      }
+    }
+  });
+
+  function updateFilterWithYear(year) {
+    var currentUrl = window.location.href;
+    var newUrl = new URL(currentUrl);
+    newUrl.searchParams.set('singleYear', year);
+    window.location.href = newUrl;
+  }
+
+  function updateFilterWithSource(year) {
+    var currentUrl = window.location.href;
+    var newUrl = new URL(currentUrl);
+    newUrl.searchParams.set('source_title', year);
+    window.location.href = newUrl;
+  }
+
+  function updateFilterWithCreator(year) {
+    var currentUrl = window.location.href;
+    var newUrl = new URL(currentUrl);
+    newUrl.searchParams.set('creator', year);
+    window.location.href = newUrl;
+  }
+
+  document.getElementById('search_source_title').addEventListener('input', function (e) {
+    var searchValue = e.target.value.toLowerCase();
+    var radios = document.getElementById('source_title').getElementsByTagName('label');
+    for (var i = 0; i < radios.length; i++) {
+      var radioLabel = radios[i].textContent.toLowerCase();
+      if (radioLabel.includes(searchValue)) {
+        radios[i].style.display = '';
+      } else {
+        radios[i].style.display = 'none';
+      }
+    }
+  });
+
+  document.getElementById('search_source_creator').addEventListener('input', function (e) {
+    var searchValue = e.target.value.toLowerCase();
+    var radios = document.getElementById('search_creator').getElementsByTagName('label');
+    for (var i = 0; i < radios.length; i++) {
+      var radioLabel = radios[i].textContent.toLowerCase();
+      if (radioLabel.includes(searchValue)) {
+        radios[i].style.display = '';
+      } else {
+        radios[i].style.display = 'none';
+      }
+    }
+  });
+
+  document.getElementById('Search-Article').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      var searchValue = this.value;
+      var currentUrl = window.location.href;
+      var newUrl = new URL(currentUrl);
+      newUrl.searchParams.set('searchWithin', searchValue);
+      window.location.href = newUrl;
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    function setIfQueryParamExists(queryParam, elementId) {
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has(queryParam)) {
+        var value = urlParams.get(queryParam);
+        document.getElementById(elementId).value = value;
+      }
+    }
+
+    setIfQueryParamExists('source_title', 'search_source_title');
+
+    setIfQueryParamExists('source_creator', 'search_source_creator');
+
+    setIfQueryParamExists('searchWithin', 'Search-Article');
+  });
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function checkQueryParams(params) {
+      return params.some(param => new URLSearchParams(window.location.search).has(param));
+    }
+
+    const queryParams = ['search', 'advancedQuery', 'creator', 'source_title', 'minYear', 'maxYear', 'singleYear', 'searchWithin'];
+
+    if (checkQueryParams(queryParams)) {
+      document.getElementById('resetFilter').style.display = 'flex';
+    } else {
+      document.getElementById('resetFilter').style.display = 'none';
+    }
+
+    document.getElementById('resetFilter').addEventListener('click', function () {
+      const url = new URL(window.location);
+      queryParams.forEach(param => {
+        url.searchParams.delete(param);
+      });
+
+      window.location.href = url;
+
+      document.getElementById('resetFilter').style.display = 'none';
+    });
+
+  });
+</script>
+
+
 {% endblock %}

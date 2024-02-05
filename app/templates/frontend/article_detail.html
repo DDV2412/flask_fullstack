@@ -75,10 +75,12 @@ education, and health. {% endblock %}
                                 Abstract
                             </h4>
                         </a>
+                        {%if article['content']%}
                         <h4 class="text-color-secondary_900 text-weight-semibold">Introduction</h4>
                         <h4 class="text-color-secondary_900 text-weight-semibold">Method</h4>
                         <h4 class="text-color-secondary_900 text-weight-semibold">Result</h4>
                         <h4 class="text-color-secondary_900 text-weight-semibold">Conclusion</h4>
+                        {%endif%}
                     </div>
                 </div>
                 <div id="w-node-_6e45bf30-1aff-8a7c-125d-1d527cf3f80b-8e6546b6"
@@ -86,48 +88,13 @@ education, and health. {% endblock %}
                     <h3 id="abstract" class="text-size-large text-weight-semibold text-color-secondary_900">Abstract
                     </h3>
                     <p>{{article['description']}}</p>
+
+                    {%if article['content']%}
                     <div class="rich_text-blog w-richtext">
-                        <h2>Aperiam dolorum nostrum ducimus dolores est.</h2>
-                        <p>Et rem modi laboriosam sit nam tempore. Velit dolorem saepe culpa. Hic velit qui repellat
-                            illo alias. Maxime consequatur et et dolore provident nulla sed. Tempora fuga reiciendis
-                            consequatur esse. Enim nesciunt dolor qui magni.</p>
-                        <h3>Quam minus esse ipsam rerum quis sequi adipisci officia impedit.</h3>
-                        <blockquote>Doloribus quo earum perspiciatis dolores ea sunt aspernatur nulla. Id quo
-                            consequuntur totam odio. Enim qui non consequuntur quia accusantium assumenda amet minus
-                            officiis.</blockquote>
-                        <p>Quam animi perferendis quibusdam libero dolores. Rerum quaerat et occaecati dicta. Et
-                            quia non odit quis ut ipsum esse et non. Id assumenda cupiditate. Placeat assumenda
-                            occaecati. Dolores deleniti vel rem rerum rerum dicta.</p>
-                        <p>Ut molestias impedit eos rem doloremque est ullam quam. Ipsum id accusamus vitae.
-                            Accusamus ad modi cum aut eum hic ut doloribus facere. Voluptatum dolorem qui placeat
-                            quam sint. Officiis voluptatum error explicabo et doloremque quisquam omnis distinctio
-                            cum. Dignissimos consequuntur accusamus aut commodi aut modi iusto.</p>
-                        <h2>Eveniet quidem facere aliquid.</h2>
-                        <p>Dolor eius nisi quam ducimus molestias ut quia. Sint ut sequi. Omnis quod et in
-                            voluptatem consequuntur velit.</p>
-                        <h3>Quia animi animi rerum sint dicta sed esse.</h3>
-                        <blockquote>Quis dolorem tempore porro. Magnam rerum voluptatem neque. Consequatur rerum
-                            dolor est. Atque quia dolores. Alias voluptas veniam nihil repellat impedit aut aut.
-                        </blockquote>
-                        <p>Dolores quidem dicta quod dolor voluptas. Iusto rem vero ex non dolores mollitia
-                            molestiae ea. Impedit dolor sequi maxime earum nihil repellendus. Incidunt quia
-                            cupiditate ex illo. Ullam ratione et laborum beatae nobis fugit. Beatae animi aut
-                            tenetur.</p>
-                        <p>Maxime deserunt eum enim sint delectus rerum ratione optio. Quia aliquid itaque. Velit
-                            voluptas optio molestiae animi totam. Amet debitis et aut corrupti autem aut sed ut
-                            deleniti. Illum voluptatibus eaque officia iste molestiae omnis accusantium nam.</p>
-                        <h2>Rerum sed molestiae quas dicta sint incidunt itaque id sed.</h2>
-                        <p>Qui dolorum dolorum sunt laboriosam distinctio adipisci hic. Quidem qui nihil nostrum
-                            debitis praesentium ad. Quibusdam vitae reiciendis unde. Consectetur aspernatur iusto
-                            ullam veritatis nobis beatae laboriosam. Veniam qui non similique ipsum non assumenda
-                            sint cumque explicabo. Tempora error qui reiciendis et dicta.</p>
-                        <h3>Et incidunt molestiae nulla dolorum.</h3>
-                        <blockquote>Maxime impedit itaque. Labore numquam accusamus in voluptas. Omnis reprehenderit
-                            explicabo qui cupiditate aut. Hic alias odio fuga eveniet dolore sed praesentium
-                            inventore.</blockquote>
-                        <p>Qui fugiat qui</p>
-                        <p>L</p>
+                        {{article['content'] | safe}}
                     </div>
+                    {%endif%}
+
                 </div>
                 <div id="w-node-d2951161-96d8-fc96-b6dd-8c99fdfac310-8e6546b6" class="article_sidebar-sticky">
                     <div class="article_sidebar-wrapper">
@@ -203,6 +170,10 @@ education, and health. {% endblock %}
 
                             {% if article['issue'] is not none and article['issue']|length > 0 %}
                             <div>Issue {{ article['issue'] }}</div>
+                            {% endif %}
+
+                            {% if article['publish_at'] is not none and article['publish_at']|length > 0 %}
+                            <div>Publish at {{ article['publish_at'] }}</div>
                             {% endif %}
 
                         </div>

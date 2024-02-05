@@ -20,9 +20,8 @@ class Article:
             search = request.args.get("search", None)
             sort_field = request.args.get("sort_field", None)
             sort_order = request.args.get("sort_order", None)
-            subject_filter = request.args.get("subject_filter", None)
-            journal_filter = request.args.get("journal_filter", None)
-            author_filter = request.args.get("author_filter", None)
+            journal_filter = request.args.get("source_title", None)
+            author_filter = request.args.get("creator", None)
             singleYear = request.args.get("singleYear", None)
             minYear = request.args.get("minYear", None)
             maxYear = request.args.get("maxYear", None)
@@ -34,7 +33,6 @@ class Article:
                 search,
                 sort_field,
                 sort_order,
-                subject_filter,
                 journal_filter,
                 author_filter,
                 singleYear,
