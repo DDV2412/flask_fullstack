@@ -138,7 +138,7 @@ class RequestOAI:
                     "publish_at": publishDate,
                     "publish_year": publishYear,
                     "doi": doi,
-                    "featured": False,
+                    "isFeatured": False,
                     "file_view": fileView,
                     "journal": journal,
                     "volume": volume,

@@ -43,7 +43,7 @@ def init_router(app):
     file_router = FileController(app)
     app.register_blueprint(file_router.blueprint)
 
-    index_router = Home()
+    index_router = Home(app)
     app.register_blueprint(index_router.blueprint)
 
     about_router = About()

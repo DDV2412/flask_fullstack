@@ -104,7 +104,7 @@ education, and health. {% endblock %}
                             <div data-current="Tab 3" data-easing="ease" data-duration-in="300" data-duration-out="100"
                                 class="cite_tabs-wrapper w-tabs">
                                 <div class="cite_menu-list w-tab-menu" role="tablist"><a data-w-tab="Tab 1"
-                                        class="cite-link w-inline-block w-tab-link" tabindex="-1"
+                                        class="cite-link w-inline-block w-tab-link w--current" tabindex="-1"
                                         id="w-tabs-0-data-w-tab-0" href="#w-tabs-0-data-w-pane-0" role="tab"
                                         aria-controls="w-tabs-0-data-w-pane-0" aria-selected="false">
                                         <div>Plan</div>
@@ -112,32 +112,29 @@ education, and health. {% endblock %}
                                         id="w-tabs-0-data-w-tab-1" href="#w-tabs-0-data-w-pane-1" role="tab"
                                         aria-controls="w-tabs-0-data-w-pane-1" aria-selected="false">
                                         <div>Bib</div>
-                                    </a><a data-w-tab="Tab 3" class="cite-link w-inline-block w-tab-link w--current"
+                                    </a><a data-w-tab="Tab 3" class="cite-link w-inline-block w-tab-link "
                                         id="w-tabs-0-data-w-tab-2" href="#w-tabs-0-data-w-pane-2" role="tab"
                                         aria-controls="w-tabs-0-data-w-pane-2" aria-selected="true">
                                         <div>RIS</div>
                                     </a></div>
                                 <div class="cite_content-wrapper w-tab-content">
-                                    <div data-w-tab="Tab 1" class="cite-content w-tab-pane" id="w-tabs-0-data-w-pane-0"
-                                        role="tabpanel" aria-labelledby="w-tabs-0-data-w-tab-0">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                            varius enim in eros elementum tristique.</p>
+                                    <div data-w-tab="Tab 1" class="cite-content w-tab-pane w--tab-active"
+                                        id="w-tabs-0-data-w-pane-0" role="tabpanel"
+                                        aria-labelledby="w-tabs-0-data-w-tab-0">
+
                                     </div>
                                     <div data-w-tab="Tab 2" class="cite-content w-tab-pane" id="w-tabs-0-data-w-pane-1"
                                         role="tabpanel" aria-labelledby="w-tabs-0-data-w-tab-1">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                            varius enim in eros elementum tristique.</p>
+
                                     </div>
-                                    <div data-w-tab="Tab 3" class="cite-content w-tab-pane w--tab-active"
-                                        id="w-tabs-0-data-w-pane-2" role="tabpanel"
-                                        aria-labelledby="w-tabs-0-data-w-tab-2">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                            varius enim in eros elementum tristique.</p>
+                                    <div data-w-tab="Tab 3" class="cite-content w-tab-pane " id="w-tabs-0-data-w-pane-2"
+                                        role="tabpanel" aria-labelledby="w-tabs-0-data-w-tab-2">
+
                                     </div>
                                 </div>
                             </div>
-                        </div><a data-w-id="4ca7f067-2539-c7ce-65be-544c80bbe68f" style="opacity: 0;" href="#"
-                            class="button-primary w-inline-block"><img
+                        </div><a data-w-id="4ca7f067-2539-c7ce-65be-544c80bbe68f" style="opacity: 0;"
+                            href="{{article['file_view']}}" target="_blank" class="button-primary w-inline-block"><img
                                 src="https://assets-global.website-files.com/659ac690a512d75c923b3d93/65a10391c41387329d28ff1d_Paper.webp"
                                 loading="lazy" width="96" height="96" alt="Paper Icon" class="icon-button">
                             <div>Full View</div>
@@ -146,7 +143,8 @@ education, and health. {% endblock %}
                             class="article_sidebar">
                             <h4 class="text-color-secondary_900 text-weight-semibold">DOI</h4>
                             <a href="{{article['doi']}}">
-                                <div class="text-size-regular text-color-secondary_900">{{article['doi']}}</div>
+                                <div class="text-size-regular text-color-secondary_900" id="doi">{{article['doi']}}
+                                </div>
                             </a>
                         </div>
                         <div data-w-id="c48e53ad-a212-bbe2-0404-e7da39682f6e" style="opacity: 0;"
@@ -184,4 +182,37 @@ education, and health. {% endblock %}
     </div>
 </section>
 {%include 'frontend/components/cta.html'%}
+
+<script src="https://cdn.jstag.dev/citation-js/0.7.8/citation.min.js"></script>
+<script>
+    const Cite = require('citation-js');
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const doi = document.getElementById('doi').textContent
+
+        if (doi) {
+            let data = new Cite(doi);
+
+            let outputPlan = data.format("bibliography", {
+                format: "text",
+                template: "ieee",
+                lang: "en-US",
+            });
+
+            let outputBib = data.format("bibtex");
+
+            let outputRis = data.format("ris");
+
+            const planText = document.getElementById('w-tabs-0-data-w-pane-0')
+            const bibTex = document.getElementById('w-tabs-0-data-w-pane-1')
+            const risText = document.getElementById('w-tabs-0-data-w-pane-2')
+
+            planText.append(outputPlan)
+            bibTex.append(outputBib)
+            risText.append(outputRis)
+        }
+    })
+</script>
+
+
 {% endblock %}

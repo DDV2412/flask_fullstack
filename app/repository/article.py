@@ -38,7 +38,7 @@ class ArticleRepository:
         minYear=None,
         maxYear=None,
         searchWithin=None,
-        featured=False,
+        isFeatured=None,
         advancedQuery=None,):
         
         offset = (page - 1) * per_page
@@ -53,15 +53,15 @@ class ArticleRepository:
             }
 
 
-        if featured is not None:
-            search_criteria["featured"] = featured
+        if isFeatured is not None:
+            search_criteria["isFeatured"] = True if isFeatured.lower() == 'true' else False
 
         if advancedQuery:
             pattern = r'\(\s*"(?P<field>[^"]+)":\s*(?P<value>[^)]+)\s*\)(?=\s*(?P<operator>[A-Z]+)\s*|\s*$)'
 
             queries = re.findall(pattern, advancedQuery)
 
-            search_criteria = {"featured": False, "$and": []}
+            search_criteria = {"isFeatured": None, "$and": []}
 
             operator = "AND"
 
@@ -278,7 +278,10 @@ class ArticleRepository:
         return self.article_collection.find_one({"doi": doi})
     
     def update_article(self, article_id, updates):
-        return self.article_collection.update_one({"_id": ObjectId(article_id)}, {"$set": updates})
+        article = self.article_collection.update_one({"_id": ObjectId(article_id)}, {"$set": updates})
+
+        print(article)
+        return article
 
     def delete_article(self, article_id):
         return self.article_collection.delete_one({"_id": ObjectId(article_id)})

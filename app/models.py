@@ -95,7 +95,7 @@ class Article(Document):
     doi = StringField(required=True, unique=True)
     thumbnail_image = StringField()
     main_image = StringField()
-    featured = BooleanField(default=False)
+    isFeatured = BooleanField(default='false')
     file_view = StringField()
     journal = ReferenceField(Journal)
     volume = StringField()

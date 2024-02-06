@@ -23,7 +23,7 @@ class Articles:
             minYear = request.args.get("minYear", None)
             maxYear = request.args.get("maxYear", None)
             searchWithin = request.args.get("searchWithin", None)
-            featured = request.args.get("featured", False)
+            isFeatured = request.args.get("isFeatured", None)
             advancedQuery = request.args.get("advancedQuery", None)
             articles = self.service.get_all_articles(page,
                 per_page,
@@ -36,8 +36,9 @@ class Articles:
                 minYear,
                 maxYear,
                 searchWithin,
-                featured,
+                isFeatured,
                 advancedQuery)
+            
 
             return render_template('frontend/articles.html', articles=articles)
         

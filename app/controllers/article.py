@@ -26,7 +26,7 @@ class Article:
             minYear = request.args.get("minYear", None)
             maxYear = request.args.get("maxYear", None)
             searchWithin = request.args.get("searchWithin", None)
-            featured = request.args.get("featured", False)
+            isFeatured = request.args.get("isFeatured", None)
             advancedQuery = request.args.get("advancedQuery", None)
             articles = self.service.get_all_articles(page,
                 per_page,
@@ -39,7 +39,7 @@ class Article:
                 minYear,
                 maxYear,
                 searchWithin,
-                featured,
+                isFeatured,
                 advancedQuery)
 
             return render_template('dashboard/article/index.html', articles=articles)
@@ -51,9 +51,6 @@ class Article:
             article = self.service.find_by_id(id)
 
             if request.method == 'POST':
-                
-
-                
                 creators = []
                 for key, value in request.form.items():
                     if key.startswith('creators'):
@@ -63,11 +60,10 @@ class Article:
                         field = key.split('[')[2].split(']')[0]
                         creators[int(index)][field] = value
 
-                featured_form_value = request.form.get('featured')
+                isFeatured = True if request.form.get('isFeatured') == 'on' else False
 
-                featured = True if featured_form_value and featured_form_value.lower() == 'on' else False
 
-                
+
                 data = {
                         'title' : request.form.get('title'),
                         'doi' : request.form.get('doi'),
@@ -75,12 +71,13 @@ class Article:
                         'thumbnail_image' : request.form.get('thumbnail_image'),
                         'file_view' : request.form.get('file_view'),
                         'content' : request.form.get('content'),
-                        'featured' : featured,
+                        'isFeatured' : isFeatured,
                         'creators': creators
                     }
-                    
+
                 try:
                     article = self.service.update_article(article['_id'], data)
+
                     success_message = f'Article successfully updated with ID: {id}'
                     flash(success_message)
 

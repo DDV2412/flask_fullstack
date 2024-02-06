@@ -20,7 +20,7 @@ class ArticleService:
         minYear,
         maxYear,
         searchWithin,
-        featured,
+        isFeatured,
         advancedQuery,):
         return self.article_repository.find_all_articles(page,
             per_page,
@@ -33,7 +33,7 @@ class ArticleService:
             minYear,
             maxYear,
             searchWithin,
-            featured,
+            isFeatured,
             advancedQuery,)
     
     def find_by_id(self, article_id):
