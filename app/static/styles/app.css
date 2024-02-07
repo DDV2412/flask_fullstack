@@ -135,7 +135,7 @@ input[type="radio"]:checked + .single_year-label {
   left: 0;
   width: 100%;
   height: 1.875rem;
-  background-image: url("https://uploads-ssl.webflow.com/659ac690a512d75c923b3d93/659f493818291548d31e0546_Union.png");
+  background-image: url("../images/659f493818291548d31e0546_Union.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
@@ -2474,7 +2474,7 @@ blockquote {
   height: 1rem;
   border: 0px none var(--primary-900);
   background-color: var(--primary-900);
-  background-image: url("./images/checks-1.webp");
+  background-image: url("./../images/checks-1.webp");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;

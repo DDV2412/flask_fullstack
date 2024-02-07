@@ -117,17 +117,21 @@ education, and health. {% endblock %}
                                 <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
                                 <div fs-rangeslider-element="handle" class="fs-rangeslider_handle"></div>
                                 <div fs-rangeslider-element="fill" class="fs-rangeslider_fill"></div>
-                              </div><input class="fs-rangeslider_input w-input" maxlength="256" name="From-3"
-                                fs-cmsfilter-field="year" data-name="From 3" fs-cmsfilter-range="from"
-                                placeholder="From" type="text" id="From-3"><input class="fs-rangeslider_input w-input"
-                                maxlength="256" name="To-3" fs-cmsfilter-field="year" data-name="To 3"
-                                fs-cmsfilter-range="to" placeholder="To" type="text" id="To-3">
+                              </div>
+                              <input class="fs-rangeslider_input w-input" maxlength="256" name="minYear"
+                                fs-cmsfilter-field="year" data-name="minYear" fs-cmsfilter-range="minYear"
+                                placeholder="minYear" type="text" id="minYear">
+                              <input class="fs-rangeslider_input w-input" maxlength="256" name="maxYear"
+                                fs-cmsfilter-field="year" data-name="maxYear" fs-cmsfilter-range="maxYear"
+                                placeholder="maxYear" type="text" id="maxYear">
                               <div class="fs-range_values">
                                 <div><span fs-rangeslider-element="display-value">0</span></div>
                                 <div><span fs-rangeslider-element="display-value">0</span></div>
                               </div>
                             </div>
                           </div>
+
+                          <button class="button-primary" id="filterRange">Filter</button>
                         </div>
                       </div>
                     </div>
@@ -456,6 +460,19 @@ education, and health. {% endblock %}
       }
     }
   });
+  const filterRange = document.getElementById("filterRange");
+
+  function updateFilterWithRangeYear() {
+    const minYear = document.getElementById('minYear').value;
+    const maxYear = document.getElementById('maxYear').value;
+
+    const newQueryString = `?minYear=${minYear}&maxYear=${maxYear}`;
+
+    window.location.href = newQueryString
+  }
+
+  filterRange.addEventListener('click', updateFilterWithRangeYear);
+
 
   function updateFilterWithYear(year) {
     var currentUrl = window.location.href;

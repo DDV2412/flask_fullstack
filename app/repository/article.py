@@ -61,7 +61,7 @@ class ArticleRepository:
 
             queries = re.findall(pattern, advancedQuery)
 
-            search_criteria = {"isFeatured": None, "$and": []}
+            search_criteria = {"$and": []}
 
             operator = "AND"
 
