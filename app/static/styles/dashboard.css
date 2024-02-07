@@ -38,6 +38,14 @@ html {
   margin: 0;
 }
 
+.rich_text-wrapper {
+  min-height: 10rem;
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  border-radius: var(--rounded-small);
+  outline-color: var(--primary-color);
+}
+
 body {
   min-height: 100vh;
   padding: 0;

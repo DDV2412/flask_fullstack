@@ -29,7 +29,7 @@
             </div>
             <div class="field-wrapper">
                 <label for="short_summary">Summary</label>
-                <textarea id="short_summary" name="short_summary" class="input-field"></textarea>
+                <div id="short_summary" name="short_summary" contenteditable class="rich_text-wrapper"></div>
             </div>
             <div class="field-wrapper">
                 <label for="description">Description</label>
@@ -140,10 +140,7 @@
     </div>
 
 </section>
-<script>
-    new RichTextEditor("#short_summary");
-    new RichTextEditor("#description");
-</script>
+
 <script src="{{ url_for('static', filename='javascripts/validation/validation.js') }}"></script>
 
 {% endblock %}

@@ -52,7 +52,6 @@ const webpackConfig = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
-    citationJs,
   ],
   resolve: {
     extensions: [".js", ".css"],
