@@ -75,13 +75,26 @@ class RequestOAI:
             title = dc.find("{*}title").text
             creators = dc.findall("{*}creator")
             subjects = dc.findall("{*}subject")
-            description = dc.find("{*}description").text
+
+            description_element = dc.find("{*}description")
+            if description_element is not None:
+                description = description_element.text
+            else:
+                description = " ";  
+
             publisher = dc.find("{*}publisher").text
             publishDate = dc.find("{*}date").text
-            doi = dc.findall("{*}identifier")[-1].text
+
+            doi_elements = dc.findall("{*}identifier")
+            if doi_elements:
+                doi = doi_elements[-1].text
+            else:
+                doi = " " 
+
             sources = dc.findall("{*}source")[0].text
             fileView_elements = dc.findall("{*}relation")
             fileView = fileView_elements[0].text if fileView_elements else None
+
 
             sources_split = sources.split(";")
 
