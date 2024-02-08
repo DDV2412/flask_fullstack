@@ -134,10 +134,17 @@ class RequestOAI:
 
             for creator in creators:
                 full_name = creator.text
-                give_name, surname = full_name.split(", ")
+                parts = full_name.split(", ", 1)
+                if len(parts) == 2:
+                    give_name, surname = parts
+                else:
+                    give_name = parts[0]
+                    surname = ""  
 
-                creator_object = {"name": f'{surname} {give_name}', "orcid": ""}
-                creators_data.append(creator_object)
+                full_name = f"{surname} {give_name}".strip() 
+
+                creators_data.append({"name": full_name, "orcid": ""})
+
 
             results.append(
                 {
@@ -159,5 +166,7 @@ class RequestOAI:
                     "pages": pages,
                 }
             )
+
+        
 
         return results
