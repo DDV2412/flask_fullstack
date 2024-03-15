@@ -39,7 +39,7 @@ education, and health. {% endblock %}
               <form id="email-form" name="email-form" data-name="Email Form" method="get" class="search_home-form"
                 data-wf-page-id="659fa9aba7d2044d28811ffb" data-wf-element-id="7cc455f8-29e1-b72e-bc69-57a9ea160b5c">
                 <input class="search_input-field w-input" maxlength="256" name="Search" data-name="Search"
-                  placeholder="Search for publication title ...." type="text" id="Search"><input type="submit"
+                  placeholder="Search for publication title ...." type="text" id="search-form"><input type="submit"
                   data-wait="" class="search_home-submit w-button" value="Search">
               </form>
 
@@ -93,4 +93,22 @@ education, and health. {% endblock %}
   </div>
 </section>
 {%include 'frontend/components/cta.html'%}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('search-form');
+    const baseURL = "{{ url_for('articles.articles') }}";
+
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const searchValue = document.querySelector('[name="Search"]').value;
+
+      const destinationURL = `${baseURL}?search=${encodeURIComponent(searchValue)}`;
+
+
+      window.location.href = destinationURL;
+    });
+  });
+</script>
 {% endblock %}
